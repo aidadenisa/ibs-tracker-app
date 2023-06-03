@@ -20,9 +20,9 @@ const App = () => {
   const fetchEvents = () => {
     console.log('effect');
     const fetchData = async () => {
-      const resultEvents = await eventsService.getEvents();
-      setEvents(resultEvents.data);
-      console.log(resultEvents.data);
+      const events = await eventsService.getEvents();
+      setEvents(events);
+      console.log(events);
     }
   
     fetchData()
@@ -33,9 +33,9 @@ const App = () => {
     console.log('records');
     recordsService
       .getRecords('63c056c5c3b3e5612cfc62fb')
-      .then(response => {
-        setRecords(response.data);
-        console.log(response.data);
+      .then(records => {
+        setRecords(records);
+        console.log(records);
       })
       .catch(console.error);
   }
@@ -49,12 +49,12 @@ const App = () => {
   };
 
   // more info on effects https://devtrium.com/posts/async-functions-useeffect
-  useEffect(fetchEvents, [records]);
+  useEffect(fetchEvents, []);
   useEffect(fetchRecords, [])
 
   const createRecord = async () => {
-    const result = await recordsService.createRecord(newRecord);
-    setRecords([...records, result.data]);
+    const newRecordData = await recordsService.createRecord(newRecord);
+    setRecords([...records, newRecordData]);
   }
 
   const clickHandler = () => {
@@ -78,7 +78,7 @@ const App = () => {
      <Hello name={name} counter={counter}/>
      <p>{counter}</p>
      {counter % 4 === 0 && <div>{arr.join(' ')}</div>}
-     {arr.map( (num, index) => (<div key={index}>{num}</div>))}
+     {arr && arr.length && arr.map( (num, index) => (<div key={index}>{num}</div>))}
 
      <form onSubmit={addCounter}>
       <input 
@@ -88,7 +88,7 @@ const App = () => {
       <button type="submit">Add counter value</button>
      </form>
      <button onClick={createRecord}>Create Record</button>
-     {records.map(rec => <div key={rec.id}> {rec.date} </div>)}
+     {records && records.length && records.map(rec => <div key={rec.id}> {rec.date} </div>)}
     </div>
   );
 }
