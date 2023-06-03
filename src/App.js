@@ -1,6 +1,8 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+
+import eventsService from './services/events';
+import recordsService from './services/records';
 
 const Hello = ({name, counter}) => {
   return (
@@ -15,7 +17,29 @@ const App = () => {
   const [arr, setArr] = useState([0]);
   const [newCounter, setNewCounter] = useState(0);
 
+  const fetchEvents = () => {
+    console.log('effect');
+    const fetchData = async () => {
+      const resultEvents = await eventsService.getEvents();
+      setEvents(resultEvents.data);
+      console.log(resultEvents.data);
+    }
+  
+    fetchData()
+      .catch(console.error);
+  }
 
+  const fetchRecords = () => {
+    console.log('records');
+    recordsService
+      .getRecords('63c056c5c3b3e5612cfc62fb')
+      .then(response => {
+        setRecords(response.data);
+        console.log(response.data);
+      })
+      .catch(console.error);
+  }
+  
 
   const [events, setEvents] = useState([]);
   const [records, setRecords] = useState([]);
@@ -25,34 +49,11 @@ const App = () => {
   };
 
   // more info on effects https://devtrium.com/posts/async-functions-useeffect
-  const getEvents = () => {
-    console.log('effect');
-    const fetchData = async () => {
-      const resultEvents = await axios.get('http://localhost:3030/events');
-      setEvents(resultEvents.data);
-      console.log(resultEvents.data);
-    }
-
-    fetchData()
-      .catch(console.error);
-  };
-  useEffect(getEvents, [records]);
-
-  const getRecords = () => {
-    console.log('records');
-    const fetchData = async () => {
-      const resultRecords = await axios.get('http://localhost:3030/records/63c056c5c3b3e5612cfc62fb');
-      setRecords(resultRecords.data);
-      console.log(resultRecords.data);
-    }
-
-    fetchData()
-      .catch(console.error);
-  }
-  useEffect(getRecords, [])
+  useEffect(fetchEvents, [records]);
+  useEffect(fetchRecords, [])
 
   const createRecord = async () => {
-    const result = await axios.post('http://localhost:3030/records', newRecord)
+    const result = await recordsService.createRecord(newRecord);
     setRecords([...records, result.data]);
   }
 
@@ -87,7 +88,7 @@ const App = () => {
       <button type="submit">Add counter value</button>
      </form>
      <button onClick={createRecord}>Create Record</button>
-     {records.map(rec => <div> {rec.date} </div>)}
+     {records.map(rec => <div key={rec.id}> {rec.date} </div>)}
     </div>
   );
 }
