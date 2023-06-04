@@ -5,6 +5,8 @@ import eventsService from './services/events';
 import recordsService from './services/records';
 
 import DateHeader from './components/dailyReport/DateHeader';
+import WeekCalendar from './components/dailyReport/WeekCalendar';
+import { getWeekDaysByDate } from './services/utils';
 
 const Hello = ({name, counter}) => {
   return (
@@ -15,7 +17,7 @@ const Hello = ({name, counter}) => {
 const App = () => {
 
   const [currentDay, setCurrentDay] = useState(new Date());
-
+  const [days, setDays] = useState(getWeekDaysByDate(new Date()))
 
   const fetchEvents = () => {
     console.log('effect');
@@ -60,6 +62,7 @@ const App = () => {
   return (
     <div className="App">
       <DateHeader date={currentDay.toISOString()} />
+      <WeekCalendar days={days}/>
     </div>
   );
 }
