@@ -26,4 +26,5 @@ const getWeekDaysByDate = (date) => {
 
 export {
   getWeekDaysByDate,
+  removeDays,
 }
