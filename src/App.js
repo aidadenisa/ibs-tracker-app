@@ -3,21 +3,14 @@ import { useState, useEffect } from 'react';
 
 import eventsService from './services/events';
 import recordsService from './services/records';
-
-import DateHeader from './components/dailyReport/DateHeader';
-import WeekCalendar from './components/dailyReport/WeekCalendar';
 import { getWeekDaysByDate } from './services/utils';
 
-const Hello = ({name, counter}) => {
-  return (
-    <p>Hello, {name}! x{counter}</p>
-  );
-}
+import LoginPage from './pages/login/LoginPage';
 
 const App = () => {
 
-  const [currentDay, setCurrentDay] = useState(new Date());
-  const [days, setDays] = useState(getWeekDaysByDate(new Date()))
+
+
 
   const fetchEvents = () => {
     console.log('effect');
@@ -46,8 +39,8 @@ const App = () => {
   const [events, setEvents] = useState([]);
   const [records, setRecords] = useState([]);
   const newRecord = {
-    userId: "63c056c5c3b3e5612cfc62fb",
-    eventId: "63b74c2cfe015ec88961f9a3",
+    userId: '63c056c5c3b3e5612cfc62fb',
+    eventId: '63b74c2cfe015ec88961f9a3',
   };
 
   // more info on effects https://devtrium.com/posts/async-functions-useeffect
@@ -59,10 +52,11 @@ const App = () => {
     setRecords([...records, newRecordData]);
   }
 
+  const login = false;
+
   return (
     <div className="App">
-      <DateHeader date={currentDay.toISOString()} />
-      <WeekCalendar days={days}/>
+      <LoginPage/>
     </div>
   );
 }
