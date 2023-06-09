@@ -1,16 +1,49 @@
+import { useState } from 'react';
 import styles from './LoginPage.module.css';
 import logo from '../../assets/img/IBS_logo.svg'
+import Input from '../../components/general/Input';
+import Button from '../../components/general/Button';
+import authService from '../../services/auth';
+import userService from '../../services/user';
+
 const LoginPage = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({})
+
+  const handleLogin = async () => {
+    const result = await authService.login(email, password);
+    if(result && result.data) {
+      const userData = await userService.getCurrentUserInfo();
+      setUser(userData);
+    }
+  }
+
   return (
     <div className={styles.loginPage}>
-      <img className={styles.logo} src={logo}/>
-      <div className={styles.authForm}>
-        <input placeholder="Email"></input>
-        <input type="password" placeholder="Password"></input>
+
+      <div className={styles.section}>
+        <img className={styles.logo} src={logo} />
+        <div className={styles.authForm}>
+          <Input 
+            value={email} 
+            onChange={({ target }) => setEmail(target.value)}
+            placeholder="Email" />
+          <Input 
+            value={password} 
+            onChange={({ target }) => setPassword(target.value)}
+            type="password" 
+            placeholder="Password"/>
+        </div>
+        {user && <div>{JSON.stringify(user)}</div>}
       </div>
       <div className={styles.actionBar}>
-        <button className="primary-button">Login</button>
-        <button className="secondary-button">Create new account</button>
+        <Button 
+          onClick={handleLogin}
+          variant="primary" 
+          label="Login"/>
+        <Button variant="secondary" label="Create new account"></Button>
       </div>
     </div>
   )

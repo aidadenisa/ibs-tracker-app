@@ -10,13 +10,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 }
 
 .logo {
   width: 50%;
+  flex-grow: 1;
 }
 .actionBar {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-end;
+  padding: var(--ibs-margin-unit) 0;
 }
+.section {
+  flex-grow: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.authForm {
+  flex-grow: 2;
+}
+

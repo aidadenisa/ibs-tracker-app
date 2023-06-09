@@ -1,0 +1,34 @@
+/* INPUT */
+.ibs-input {
+  font-size: var(--ibs-font-size-s);
+  padding: calc(var(--ibs-margin-unit) * 3 / 4) var(--ibs-margin-unit);
+  border: 1px solid #f0f0f0;
+  border-radius: var(--ibs-radius);
+  background-color: var(--ibs-color-gray-light);
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: var(--ibs-margin-unit);
+}
+.ibs-input:focus {
+  outline-color: var(--ibs-color-primary);
+}
+
+/* BUTTONS */
+.ibs-btn {
+  font-size: var(--ibs-font-size-s);
+  border: 0;
+  padding: calc(var(--ibs-margin-unit) * 3 / 4) var(--ibs-margin-unit);
+  margin-top: var(--ibs-margin-unit);
+  border-radius: var(--ibs-radius);
+  font-weight: 700;
+}
+
+.ibs-btn-primary {
+  color: var(--ibs-color-primary-light);
+  background-color: var(--ibs-color-primary);
+}
+
+.ibs-btn-secondary {
+  color: var(--ibs-color-primary);
+  background-color: var(--ibs-color-primary-light);
+}

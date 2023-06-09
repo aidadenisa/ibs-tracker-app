@@ -1,5 +1,12 @@
 :root {
+
+  --ibs-color-primary: #4F66F4;
+  --ibs-color-primary-light: #F1F3FF; 
+  --ibs-color-gray-light: #F9F9F9;
+
   --ibs-margin-unit: 16px;
+
+  --ibs-radius: 16px;
 
   --ibs-font-size-xs: 12px;
   --ibs-font-size-s: 16px;
