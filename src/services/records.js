@@ -1,12 +1,16 @@
 import axios from 'axios';
+import { getHeadersConfig } from './utils';
+
 const BASE_URL = process.env.REACT_APP_API_URL + '/records';
 
 const getRecords = async (id) => {
-  return (await axios.get(`${BASE_URL}/${id}`)).data;
+  const config = getHeadersConfig();
+  return (await axios.get(`${BASE_URL}/${id}`, config)).data;
 }
 
 const createRecord = async (newRecord) => {
-  return (await axios.post(BASE_URL, newRecord)).data;
+  const config = getHeadersConfig();
+  return (await axios.post(BASE_URL, newRecord, config)).data;
 }
 
 export default {

@@ -1,3 +1,12 @@
+const getHeadersConfig = () => {
+  const headers = {}
+  const token = localStorage.getItem('token');
+  if(token) {
+    headers.Authorization = `Bearer ${token}` 
+  } 
+  return { headers };
+}
+
 const removeDays = (currentDay, numberOfDays) => {
   const dateOffset = (24*60*60*1000) * numberOfDays; 
   const newDate = new Date();
@@ -27,4 +36,5 @@ const getWeekDaysByDate = (date) => {
 export {
   getWeekDaysByDate,
   removeDays,
+  getHeadersConfig,
 }

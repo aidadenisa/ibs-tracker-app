@@ -4,13 +4,28 @@ import { useState, useEffect } from 'react';
 import eventsService from './services/events';
 import recordsService from './services/records';
 import { getWeekDaysByDate } from './services/utils';
-
+import userService from './services/user';
 import LoginPage from './pages/login/LoginPage';
+import DayReport from './pages/dailyReport/DayReport';
 
 const App = () => {
 
+  const [user, setUser ] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
+  useEffect( () => {
+    const fetchUser = async () => {
+      const userData = await userService.getCurrentUserInfo();
+      setUser(userData);
+    }
 
+    fetchUser()
+      .catch(console.error);
+  }, [loggedIn]);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  }
 
   const fetchEvents = () => {
     console.log('effect');
@@ -56,7 +71,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <LoginPage/>
+      {!user && <LoginPage onLogin={handleLogin}/>} 
+      {user && <DayReport/>}
     </div>
   );
 }

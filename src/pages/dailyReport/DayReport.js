@@ -1,6 +1,7 @@
 import styles from './DayReport.module.css';
-import DateHeader from './components/dailyReport/DateHeader';
-import WeekCalendar from './components/dailyReport/WeekCalendar';
+import DateHeader from '../../components/dailyReport/DateHeader';
+import WeekCalendar from '../../components/dailyReport/WeekCalendar';
+import { getWeekDaysByDate } from '../../services/utils';
 import { useState, useEffect } from 'react';
 
 const DayReport = () => {

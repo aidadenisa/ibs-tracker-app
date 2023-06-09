@@ -6,7 +6,7 @@ import Button from '../../components/general/Button';
 import authService from '../../services/auth';
 import userService from '../../services/user';
 
-const LoginPage = () => {
+const LoginPage = ({ onLogin }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,8 +15,7 @@ const LoginPage = () => {
   const handleLogin = async () => {
     const result = await authService.login(email, password);
     if(result && result.data) {
-      const userData = await userService.getCurrentUserInfo();
-      setUser(userData);
+      onLogin();
     }
   }
 
