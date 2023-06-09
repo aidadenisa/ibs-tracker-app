@@ -5,8 +5,10 @@ import { getWeekDaysByDate } from '../../services/utils';
 import { useState, useEffect } from 'react';
 
 const DayReport = () => {
+  
   const [currentDay, setCurrentDay] = useState(new Date());
-  const [days, setDays] = useState(getWeekDaysByDate(new Date()))
+  const [days, setDays] = useState(getWeekDaysByDate(new Date()));
+
 
   return (
     <div className={styles.dayReport}>

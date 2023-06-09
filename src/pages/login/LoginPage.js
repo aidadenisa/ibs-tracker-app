@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import logo from '../../assets/img/IBS_logo.svg'
 import Input from '../../components/general/Input';
@@ -6,16 +7,18 @@ import Button from '../../components/general/Button';
 import authService from '../../services/auth';
 import userService from '../../services/user';
 
-const LoginPage = ({ onLogin }) => {
+const LoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
+
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     const result = await authService.login(email, password);
     if (result && result.data) {
-      onLogin();
+      return navigate('/');
     }
   }
 
