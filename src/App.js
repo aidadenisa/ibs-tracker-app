@@ -14,6 +14,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect( () => {
+    if(!user) return;
     const fetchUser = async () => {
       const userData = await userService.getCurrentUserInfo();
       setUser(userData);
