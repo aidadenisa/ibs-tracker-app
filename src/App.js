@@ -28,6 +28,7 @@ const App = () => {
   }
 
   const fetchEvents = () => {
+    if(!user) return;
     console.log('effect');
     const fetchData = async () => {
       const events = await eventsService.getEvents();
@@ -40,6 +41,7 @@ const App = () => {
   }
 
   const fetchRecords = () => {
+    if(!user) return;
     console.log('records');
     recordsService
       .getRecords('63c056c5c3b3e5612cfc62fb')
