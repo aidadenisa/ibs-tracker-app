@@ -3,21 +3,8 @@ import { getWeekDaysByDate, formattedDayName } from '../../src/services/utils';
 describe('Day Report', function() { 
 
   //I should be logged in for viewing this page => login using cy.request
-  beforeEach(async function() {
-    try {
-      const result = await cy.request('POST', `http://localhost:3030/auth/login`, {
-        email: 'initial@test.com',
-        pass: '123456'
-      });
-      if(result && result.body) {
-        localStorage.setItem('token', result.body.token);
-        cy.visit('/')
-      }
-      cy.visit('/')
-    } catch (err) {
-      console.log(err);
-      return;
-    }
+  beforeEach(function() {
+    cy.login({ email: 'initial@test.com', password: '123456' });
   });
 
   it('shows the current day', function() {

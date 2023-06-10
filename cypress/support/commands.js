@@ -1,3 +1,27 @@
+Cypress.Commands.add('login', ({ email, password }) => {
+  cy.request('POST', `http://localhost:3030/auth/login`, {
+    email: email,
+    pass: password
+  }).then(result => {
+    if (result && result.body) {
+      localStorage.setItem('token', result.body.token);
+      return cy.visit('/')
+    } else {
+      cy.visit('/login')
+    }
+  })
+});
+
+
+/**
+ * Cypress commands are not promises, although behaving like promises. 
+ * Read more https://docs.cypress.io/guides/core-concepts/variables-and-aliases.html#Return-Values. 
+ * Also, you cannot assign or work with the return 
+ * values of any Cypress command. Commands are enqueued and run 
+ * asynchronously. What commands really return is Chainable, 
+ * in other word, it's kind of queue object which resolves with the desired value. 
+ */
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
