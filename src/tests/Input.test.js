@@ -1,29 +1,29 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Input from '../components/general/Input';
 
-import Button from '../components/general/Button';
+describe('<Input/>', () => {
+  test('renders', async () => {
+    render(<Input type="text" placeholder={'Test Input'}/>);
 
-test('renders content', () => {
+    await screen.findByPlaceholderText('Test Input');
+  });
 
-  render(<Button
-    variant="primary"
-    label="Test Button"
-  />);
+  test('has the correct value', async () => {
+    const mockHandler = jest.fn();
+    render(<Input type="text" 
+      placeholder="Test Input"
+      onChange={mockHandler}
+      />);
 
-  const element = screen.getByText('Test Button');
-  expect(element).toBeDefined();
+    const user = userEvent.setup();
+    const input = screen.getByPlaceholderText('Test Input');
+    await user.type(input, 'valueeee');
 
-});
-
-test('renders content (with CSS selector', () => {
-
-  const { container } = render(<Button
-    variant="primary"
-    label="Test Button"
-  />);
-
-  const button = container.querySelector('.ibs-btn');
-  expect(button).toHaveTextContent('Test Button');
+    expect(input).toBeDefined();
+    expect(input.value).toBe('valueeee');
+  });
 
 });

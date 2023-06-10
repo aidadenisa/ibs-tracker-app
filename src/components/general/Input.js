@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
-const Input = ({ type, placeholder, value, onChange, children }) => {
+const Input = ({ id, type, placeholder, value, onChange, children }) => {
 
   return (
     <div>
       {children}
       <input
+        id={id}
         className="ibs-input"
         type={type}
         placeholder={placeholder}

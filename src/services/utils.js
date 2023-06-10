@@ -33,8 +33,19 @@ const getWeekDaysByDate = (date) => {
   return days;
 }
 
+const getMonthName = (dateISOString) => {
+  const date = new Date(dateISOString);
+  return new Intl.DateTimeFormat('en-GB', { month : 'long' }).format(date);
+}
+
+const formattedDayName = (day) => {
+  return new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(new Date(day));
+}
+
 export {
   getWeekDaysByDate,
   removeDays,
   getHeadersConfig,
+  getMonthName,
+  formattedDayName,
 }

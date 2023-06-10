@@ -1,18 +1,17 @@
+import { formattedDayName } from '../../services/utils';
+
 const WeekCalendar = ({ days }) => {
 
   const formattedDate = (day) => {
     return (new Date(day)).getDate();
   }
-  const formattedDayName = (day) => {
-    return new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(new Date(day));
-  }
 
   return (
-    <div className="flexbox">
+    <div className="flexbox week-calendar">
       {days && days.length &&
         days.map((day, index) => <div key={index}>
-          <div>{formattedDate(day)}</div>
-          <div>{formattedDayName(day)}</div>
+          <div className="week-calendar__day">{formattedDate(day)}</div>
+          <div className="week-calendar__day-name">{formattedDayName(day)}</div>
         </div>)
       }
     </div>

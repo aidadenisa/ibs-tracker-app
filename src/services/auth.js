@@ -7,17 +7,20 @@ const login = async (email, password) => {
     pass: password,
   }; 
 
-  const result = await axios.post(`${BASE_URL}/login`, credentials)
-    .catch(error => {
-      alert(`There has been an error logging in. ${error.error}`)
-    });
-  
-  if(result && result.data && result.data.token) {
-    localStorage.setItem('token', result.data.token);
+  try {
+    const result = await axios.post(`${BASE_URL}/login`, credentials)
+    if(result && result.data && result.data.token) {
+      localStorage.setItem('token', result.data.token);
+    }
+    console.log(localStorage.getItem('token'));
+    return result;
+  } catch(err) {
+    const { response : { data : { error } } } = err;
+    if(error || error.length) {
+      return { error: `There has been an error logging in. ${ error }` };
+    }
   }
-  console.log(localStorage.getItem('token'));
-
-  return result;
+  return;
 }
 
 export default {
