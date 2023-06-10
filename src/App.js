@@ -14,6 +14,7 @@ const authRedirect = () => {
   if(!token || !token.length) {
     return redirect('/login');
   }
+  return null;
 }
 
 const router = createBrowserRouter([
