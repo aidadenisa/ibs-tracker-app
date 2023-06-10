@@ -1,5 +1,5 @@
 Cypress.Commands.add('login', ({ email, password }) => {
-  cy.request('POST', `http://localhost:3030/auth/login`, {
+  cy.request('POST', `${Cypress.env('API_URL')}/auth/login`, {
     email: email,
     pass: password
   }).then(result => {
