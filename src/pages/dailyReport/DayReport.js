@@ -3,6 +3,7 @@ import DateHeader from '../../components/dailyReport/DateHeader';
 import WeekCalendar from '../../components/dailyReport/WeekCalendar';
 import { getWeekDaysByDate } from '../../services/utils';
 import { useState, useEffect } from 'react';
+import userStore from '../../stores/userStore';
 
 const DayReport = () => {
 
@@ -13,6 +14,7 @@ const DayReport = () => {
     <div className={`day-report ${styles.dayReport}`}>
       <DateHeader date={currentDay.toISOString()} />
       <WeekCalendar days={days} />
+      {JSON.stringify(userStore.getState())}
     </div>
   )
 }

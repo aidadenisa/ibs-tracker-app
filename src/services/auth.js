@@ -1,4 +1,7 @@
 import axios from 'axios';
+import userStore from '../stores/userStore';
+import userService from '../services/user';
+
 const BASE_URL = process.env.REACT_APP_API_URL + '/auth';
 
 const login = async (email, password) => {
@@ -13,6 +16,13 @@ const login = async (email, password) => {
       localStorage.setItem('token', result.data.token);
     }
     console.log(localStorage.getItem('token'));
+    
+    const userInfo = await userService.getCurrentUserInfo();
+    userStore.dispatch({
+      type: 'LOG_USER',
+      payload: userInfo
+    });
+
     return result;
   } catch(err) {
     const { response : { data : { error } } } = err;

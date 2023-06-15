@@ -5,13 +5,11 @@ import logo from '../../assets/img/IBS_logo.svg'
 import Input from '../../components/general/Input';
 import Button from '../../components/general/Button';
 import authService from '../../services/auth';
-import userService from '../../services/user';
 
 const LoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState({});
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -59,7 +57,6 @@ const LoginPage = () => {
             </div>
           }
         </div>
-        {user && <div>{JSON.stringify(user)}</div>}
       </div>
       <div className={styles.actionBar}>
         <Button
