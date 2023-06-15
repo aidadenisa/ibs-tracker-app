@@ -1,6 +1,7 @@
 import axios from 'axios';
-import userStore from '../stores/userStore';
 import userService from '../services/user';
+import store from '../store';
+import { logUser } from '../reducers/user';
 
 const BASE_URL = process.env.REACT_APP_API_URL + '/auth';
 
@@ -18,10 +19,7 @@ const login = async (email, password) => {
     console.log(localStorage.getItem('token'));
     
     const userInfo = await userService.getCurrentUserInfo();
-    userStore.dispatch({
-      type: 'LOG_USER',
-      payload: userInfo
-    });
+    store.dispatch(logUser(userInfo));
 
     return result;
   } catch(err) {
