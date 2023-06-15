@@ -3,10 +3,11 @@ import DateHeader from '../../components/dailyReport/DateHeader';
 import WeekCalendar from '../../components/dailyReport/WeekCalendar';
 import { getWeekDaysByDate } from '../../services/utils';
 import { useState, useEffect } from 'react';
-import userStore from '../../stores/userStore';
+import { useSelector } from 'react-redux';
 
 const DayReport = () => {
 
+  const user = useSelector(state => state.user);
   const [currentDay, setCurrentDay] = useState(new Date());
   const [days, setDays] = useState(getWeekDaysByDate(new Date()));
 
@@ -14,7 +15,7 @@ const DayReport = () => {
     <div className={`day-report ${styles.dayReport}`}>
       <DateHeader date={currentDay.toISOString()} />
       <WeekCalendar days={days} />
-      {JSON.stringify(userStore.getState())}
+      {JSON.stringify(user)}
     </div>
   )
 }
