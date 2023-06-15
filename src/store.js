@@ -1,10 +1,11 @@
-import { createStore, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/user';
 
-const reducer = combineReducers({
-  user: userReducer,
-});
-const store = createStore(reducer)
+const store = configureStore({
+  reducer: {
+    user: userReducer,
+  }
+})
 
 // I did this export because sometimes I need to import store in js files 
 // This should NOT be done on server side rendering (ssr)

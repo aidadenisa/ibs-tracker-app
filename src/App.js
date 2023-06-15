@@ -1,25 +1,18 @@
 import './App.css';
-import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import LoginPage from './pages/login/LoginPage';
 import DayReport from './pages/dailyReport/DayReport';
 
+import authService from './services/auth';
 import store from './store';
-
-const authRedirect = () => {
-  const token = localStorage.getItem('token');
-  if (!token || !token.length) {
-    return redirect('/login');
-  }
-  return null;
-}
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <DayReport />,
-    loader: authRedirect
+    loader: authService.authRedirect
   }, {
     path: '/login',
     element: <LoginPage />,

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import userService from '../services/user';
 import store from '../store';
-import { logUser } from '../reducers/user';
+import { setUserInfo } from '../reducers/user';
+import { redirect } from 'react-router-dom';
 
 const BASE_URL = process.env.REACT_APP_API_URL + '/auth';
 
@@ -19,7 +20,7 @@ const login = async (email, password) => {
     console.log(localStorage.getItem('token'));
     
     const userInfo = await userService.getCurrentUserInfo();
-    store.dispatch(logUser(userInfo));
+    store.dispatch(setUserInfo(userInfo));
 
     return result;
   } catch(err) {
@@ -31,6 +32,17 @@ const login = async (email, password) => {
   return;
 }
 
+const authRedirect = async () => {
+  const token = localStorage.getItem('token');
+  if (!token || !token.length) {
+    return redirect('/login');
+  }
+  const userInfo = await userService.getCurrentUserInfo();
+  store.dispatch(setUserInfo(userInfo));
+  return null;
+}
+
 export default {
   login,
+  authRedirect,
 }
