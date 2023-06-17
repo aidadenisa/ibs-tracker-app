@@ -16,13 +16,14 @@
 //   };
 // }
 
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { User } from '../types';
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {},
   reducers: {
-    setUserInfo(state, action) {
+    setUserInfo(state, action: PayloadAction<User>) {
       return action.payload;
     },
   }

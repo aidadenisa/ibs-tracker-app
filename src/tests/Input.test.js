@@ -6,17 +6,17 @@ import Input from '../components/general/Input';
 
 describe('<Input/>', () => {
   test('renders', async () => {
-    render(<Input type="text" placeholder={'Test Input'}/>);
+    render(<Input type="text" placeholder={'Test Input'} />);
 
     await screen.findByPlaceholderText('Test Input');
   });
 
   test('has the correct value', async () => {
     const mockHandler = jest.fn();
-    render(<Input type="text" 
+    render(<Input type="text"
       placeholder="Test Input"
       onChange={mockHandler}
-      />);
+    />);
 
     const user = userEvent.setup();
     const input = screen.getByPlaceholderText('Test Input');

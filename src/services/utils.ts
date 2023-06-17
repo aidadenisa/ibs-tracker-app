@@ -1,5 +1,7 @@
-const getHeadersConfig = () => {
-  const headers = {}
+import { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
+
+const getRequestConfig = (): AxiosRequestConfig => {
+  const headers: AxiosRequestHeaders = {} as AxiosRequestHeaders;
   const token = localStorage.getItem('token');
   if(token) {
     headers.Authorization = `Bearer ${token}` 
@@ -7,15 +9,14 @@ const getHeadersConfig = () => {
   return { headers };
 }
 
-const removeDays = (currentDay, numberOfDays) => {
+const removeDays = (currentDay: Date, numberOfDays: number): Date => {
   const dateOffset = (24*60*60*1000) * numberOfDays; 
   const newDate = new Date();
   newDate.setTime(currentDay.getTime() - dateOffset);
   return newDate;
 }
 
-const getWeekDaysByDate = (date) => {
-  const current = new Date(date);
+const getWeekDaysByDate = (current: Date): string[] => {
   const oneDayOffset = 24*60*60*1000; 
 
   // getDay gives the index corresponding to the day of the week: 0-Sunday, 6-Saturday
@@ -26,26 +27,26 @@ const getWeekDaysByDate = (date) => {
   // getTime offers the time in milliseconds
   const firstDayOfTheWeek = current.getTime() - oneDayOffset * dateIndexInTheWeek;
   
-  const days = [];
+  const days:string[] = [];
   for (let i = 0; i < 7; i++) {
     days.push(new Date(firstDayOfTheWeek + oneDayOffset * i).toISOString());
   }
   return days;
 }
 
-const getMonthName = (dateISOString) => {
+const getMonthName = (dateISOString: string): string => {
   const date = new Date(dateISOString);
   return new Intl.DateTimeFormat('en-GB', { month : 'long' }).format(date);
 }
 
-const formattedDayName = (day) => {
+const getFormattedDayName = (day: string): string => {
   return new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(new Date(day));
 }
 
 export {
   getWeekDaysByDate,
   removeDays,
-  getHeadersConfig,
+  getRequestConfig,
   getMonthName,
-  formattedDayName,
+  getFormattedDayName,
 }

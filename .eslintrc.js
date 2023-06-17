@@ -8,16 +8,18 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
   parserOptions: {
     ecmaVersion: '2018',
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
+      tsx: true,
     },
     sourceType: 'module',
   },
   plugins: [
-    'react', 'jest', 'cypress'
+    'react', 'jest', 'cypress', '@typescript-eslint'
   ],
   rules: {
     'indent': [
@@ -29,8 +31,15 @@ module.exports = {
       'unix'
     ],
     'quotes': [
+      'warn',
+      'single',
+      {
+        'allowTemplateLiterals': true
+      }
+    ],
+    'jsx-quotes': [
       'error',
-      'single'
+      'prefer-double'
     ],
     // if we use == instead of ===
     'eqeqeq': 'error',
@@ -50,5 +59,10 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     // allow jsx syntax in js files (for next.js project)
     'react/prop-types': 0,
+
+    '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-unused-vars': 0,
+    '@typescript-eslint/no-extra-semi': 0,
   },
 };

@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { getHeadersConfig } from './utils';
+import { getRequestConfig } from './utils';
 
 const BASE_URL = process.env.REACT_APP_API_URL + '/events';
 
-const getEvents = async () => {
-  const config = getHeadersConfig();
+const getEvents = async (): Promise<Event> => {
+  const config = getRequestConfig();
   return (await axios.get(BASE_URL, config)).data;
 }
 

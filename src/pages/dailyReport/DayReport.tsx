@@ -4,12 +4,13 @@ import WeekCalendar from '../../components/dailyReport/WeekCalendar';
 import { getWeekDaysByDate } from '../../services/utils';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const DayReport = () => {
 
-  const user = useSelector(state => state.user);
-  const [currentDay, setCurrentDay] = useState(new Date());
-  const [days, setDays] = useState(getWeekDaysByDate(new Date()));
+  const user = useSelector((state: RootState) => state.user);
+  const [currentDay, setCurrentDay] = useState<Date>(new Date());
+  const [days, setDays] = useState<string[]>(getWeekDaysByDate(new Date()));
 
   return (
     <div className={`day-report ${styles.dayReport}`}>

@@ -1,8 +1,12 @@
-import { formattedDayName } from '../../services/utils';
+import { getFormattedDayName } from '../../services/utils';
 
-const WeekCalendar = ({ days }) => {
+interface WeekCalendarProps {
+  days: string[],
+}
 
-  const formattedDate = (day) => {
+const WeekCalendar = ({ days }: WeekCalendarProps) => {
+
+  const formattedDate = (day: string): number => {
     return (new Date(day)).getDate();
   }
 
@@ -11,7 +15,7 @@ const WeekCalendar = ({ days }) => {
       {days && days.length &&
         days.map((day, index) => <div key={index}>
           <div className="week-calendar__day">{formattedDate(day)}</div>
-          <div className="week-calendar__day-name">{formattedDayName(day)}</div>
+          <div className="week-calendar__day-name">{getFormattedDayName(day)}</div>
         </div>)
       }
     </div>
