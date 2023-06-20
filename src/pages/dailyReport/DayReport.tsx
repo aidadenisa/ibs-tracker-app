@@ -45,24 +45,13 @@ const DayReport = () => {
     <div className={`day-report ${styles.dayReport}`}>
       {showAddNewRecordModal &&
         <AddNewRecordModal
+          categories={categories}
           onClose={handleCloseModalClick}
         />
       }
       <DateHeader date={currentDay.toISOString()} />
       <WeekCalendar days={days} />
       <DailyActionBar onAddRecord={handleAddRecordClick} />
-      {/* {JSON.stringify(user)} */}
-      {categories && categories.length &&
-        categories.map(category => 
-          <div className="category" key={category.id}>
-            <strong>{category.name}</strong>
-            {category.events && category.events.length &&
-              category.events.map(event => 
-                <div className="event" key={event.id}>{event.name}</div>  
-              )
-            }
-          </div>
-        )}
     </div>
   )
 }

@@ -1,8 +1,12 @@
+import { Category } from '../../types'
+import CategorySection from '../events/CategorySection'
 import Modal from '../general/Modal'
 interface AddNewRecordModalProps {
+  categories: Category[]
   onClose: () => void,
 }
-const AddNewRecordModal = ({ onClose }: AddNewRecordModalProps) => {
+const AddNewRecordModal = ({ categories, onClose }: AddNewRecordModalProps) => {
+  
   return (
     <Modal
       title="Add new record"
@@ -12,7 +16,11 @@ const AddNewRecordModal = ({ onClose }: AddNewRecordModalProps) => {
     >
       What happened today?
       <div className="new-record__categories">
-        categorieessss
+        {categories && categories.length &&
+          categories.map(category => 
+            <CategorySection category={category} key={category.id} />
+          )
+        }
       </div>
     </Modal>
   )

@@ -1,3 +1,4 @@
+// NOTE: THE PROPS WITH __ IN FRONT ARE ONLY USED IN THE FRONTEND (NOT FROM THE DB)
 interface Category {
   id: string, 
   name: string,
@@ -9,6 +10,7 @@ interface Event {
   name: string,
   category_code: string,
   code: string,
+  __selected: boolean,
 }
 
 interface UserRecord {
