@@ -1,7 +1,7 @@
 interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'accent',
+  variant: 'primary' | 'secondary' | 'accent' | 'clear',
   label: string,
-  disabled: boolean,
+  disabled?: boolean,
   onClick?: () => void,
 }
 

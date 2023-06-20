@@ -9,6 +9,7 @@
   box-sizing: border-box;
   margin-top: var(--ibs-margin-unit);
 }
+
 .ibs-input:focus {
   outline-color: var(--ibs-color-primary);
 }
@@ -31,4 +32,34 @@
 .ibs-btn-secondary {
   color: var(--ibs-color-primary);
   background-color: var(--ibs-color-primary-light);
+}
+
+/* MODAL */
+.modal {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.modal__header,
+.modal__body, 
+.modal__action-bar {
+  padding: var(--ibs-margin-unit);
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--ibs-margin-unit);
+}
+
+.modal__action-bar {
+  display: flex;
+  justify-content: flex-end;
 }

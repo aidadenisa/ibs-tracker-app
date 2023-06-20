@@ -2,11 +2,12 @@ interface Category {
   id: string, 
   name: string,
   code: string,
+  events? : Event[]
 }
 interface Event {
   id: string,
   name: string,
-  category: Category,
+  category_code: string,
   code: string,
 }
 
