@@ -1,15 +1,16 @@
 interface ButtonProps {
   variant: 'primary' | 'secondary' | 'accent' | 'clear',
   label: string,
+  className?: string,
   disabled?: boolean,
   onClick?: () => void,
 }
 
-const Button = ({ variant, label, disabled, onClick }: ButtonProps) => {
-  const variantClass = `ibs-btn ibs-btn-${variant}`;
+const Button = ({ className, variant, label, disabled, onClick }: ButtonProps) => {
+  const buttonClasses = `ibs-btn ibs-btn-${variant} ${className}`;
   return (
     <button 
-      className={variantClass}
+      className={buttonClasses}
       disabled={disabled}
       onClick={onClick}
     >{ label }</button>

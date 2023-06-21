@@ -21,6 +21,7 @@ const Modal = ({ title, primaryBtnLabel, secondaryBtnLabel, children, onPrimary,
           {title}
         </div>
         <Button
+          className="modal__close-btn"
           variant="clear"
           label="x"
           onClick={onClose}
