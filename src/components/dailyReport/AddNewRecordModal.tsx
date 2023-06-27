@@ -11,10 +11,11 @@ const AddNewRecordModal = ({ categories, onClose }: AddNewRecordModalProps) => {
     <Modal
       title="Add new record"
       primaryBtnLabel="All done"
+      hideHeader={true}
       onClose={onClose}
       onPrimary={onClose}
     >
-      What happened today?
+      <h2>What happened today?</h2>
       <div className="new-record__categories">
         {categories && categories.length &&
           categories.map(category => 

@@ -1,9 +1,19 @@
 :root {
+  --ibs-color-background: #ffffff;
 
   --ibs-color-primary: #4F66F4;
   --ibs-color-primary-light: #F1F3FF; 
   --ibs-color-gray-light: #F9F9F9;
+  --ibs-color-gray: #AEAEAE;
+  --ibs-color-black: #1E293B;
 
+  --ibs-color-symptom: #008DBA;
+  --ibs-color-symptom-light: #dcf7ff;
+  --ibs-color-menstruation: #B00B0B;
+  --ibs-color-menstruation-light: #ffdcdc;
+  --ibs-color-stool: #8D3909;
+  --ibs-color-stool-light: #ffe5d7;
+  
   --ibs-margin-unit: 16px;
 
   --ibs-radius: 16px;
@@ -13,5 +23,7 @@
   --ibs-font-size-m: 18px;
   --ibs-font-size-l: 24px;
   --ibs-font-size-xl: 32px;
+
+
 
 }

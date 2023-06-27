@@ -1,5 +1,3 @@
 .dateHeader {
-  font-size: var(--ibs-font-size-xl);
-  margin-top: calc( 2 * var(--ibs-margin-unit));
   margin-bottom: var(--ibs-margin-unit);
 }

@@ -9,7 +9,7 @@ const CategorySection = ({ category }: CategorySectionProps) => {
   return (
     <div className={styles.categorySection}>
       <div className="category__name">
-        {category.name}
+        <h3>{category.name}</h3>
       </div>
       {
         category.events !== undefined && category.events && category.events.length 

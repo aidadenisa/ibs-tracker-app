@@ -9,4 +9,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--ibs-color-black);
+  background-color: var(--ibs-color-background);
+}
+
+div, button {
+  box-sizing: border-box;
 }

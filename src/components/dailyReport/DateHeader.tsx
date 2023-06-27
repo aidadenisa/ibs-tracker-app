@@ -9,8 +9,8 @@ const DateHeader = ({ date }: DateProps) => {
   const month = new Intl.DateTimeFormat('en-GB', { month: 'long' }).format(dateObject);
   const day = dateObject.getDate();
   return (
-    <div className={styles.dateHeader}>
-      {day} {month}
+    <div className={`${styles.dateHeader} ibs-header`}>
+      <h1>{day} {month}</h1>
     </div>
   );
 };
