@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { getRequestConfig } from './utils';
-import { NewRecord, UserRecord } from '../types';
+import { areSameDays, getRequestConfig } from './utils';
+import { NewRecord, User, UserRecord } from '../types';
 import store from '../store';
 import userService from './user';
-import { setUserInfo } from '../reducers/user';
+import { Dictionary } from '@reduxjs/toolkit';
+import { setSelectedEventsIds } from '../reducers/events';
 const BASE_URL = process.env.REACT_APP_API_URL + '/records';
 
 const getRecords = async (id: string): Promise<UserRecord> => {
@@ -37,9 +38,25 @@ const saveNewRecords = async () => {
   return;
 }
 
+const updateRecordsForCurrentDay = (userInfo: User) => {
+  const currentDay = store.getState().currentDay;
+
+  const selectedEventsIdsArray = userInfo.records && !!userInfo.records.length
+    ? userInfo.records.filter(
+      record => areSameDays(new Date(record.date), new Date(currentDay))
+    ).map(record => record.event)
+    : [];
+  const selectedEventsIds: Dictionary<boolean> = {};
+  for (let i = 0; i < selectedEventsIdsArray.length; i++) {
+    selectedEventsIds[selectedEventsIdsArray[i]] = true
+  }
+  store.dispatch(setSelectedEventsIds(selectedEventsIds));
+}
+
 
 export default {
   getRecords, 
   createRecord,
   saveNewRecords,
+  updateRecordsForCurrentDay
 }

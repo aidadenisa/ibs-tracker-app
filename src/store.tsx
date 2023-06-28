@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/user';
 import categoriesReducer from './reducers/categories';
 import eventsReducer from './reducers/events';
+import currentDayReducer from './reducers/currentDay';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     categories: categoriesReducer,
     selectedEventsIds: eventsReducer,
+    currentDay: currentDayReducer,
   }
 })
 

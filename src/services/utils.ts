@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
-import { endOfDay, startOfDay } from "date-fns";
+import { endOfDay, isSameDay, startOfDay } from 'date-fns';
 
 const getRequestConfig = (): AxiosRequestConfig => {
   const headers: AxiosRequestHeaders = {} as AxiosRequestHeaders;
@@ -44,10 +44,8 @@ const getFormattedDayName = (day: string): string => {
   return new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(new Date(day));
 }
 
-const isTimestampPartOfASpecificDate = (timestamp: string | number, date: Date) => {
-  const recordDate = new Date(timestamp);
-  return (startOfDay(date).getTime() < recordDate.getTime()) 
-    && (recordDate.getTime() < endOfDay(date).getTime()) 
+const areSameDays = (firstDate: Date | number, secondDate: Date | number) => {
+  return isSameDay(firstDate, secondDate);
 }
 
 export {
@@ -56,5 +54,5 @@ export {
   getRequestConfig,
   getMonthName,
   getFormattedDayName,
-  isTimestampPartOfASpecificDate
+  areSameDays
 }

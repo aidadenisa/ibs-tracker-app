@@ -19,9 +19,9 @@ const DayReport = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.user);
-  const categories = useSelector((state:RootState) => state.categories);
-
-  const [currentDay, setCurrentDay] = useState<Date>(new Date());
+  const categories = useSelector((state: RootState) => state.categories);
+  const currentDay = useSelector((state: RootState) => state.currentDay);
+  
   const [days, setDays] = useState<string[]>(getWeekDaysByDate(new Date()));
   const [showAddNewRecordModal, setShowAddNewRecordModal] = useState<boolean>(false);
 
@@ -37,7 +37,6 @@ const DayReport = () => {
 
   const handleAddRecordClick = () => {
     setShowAddNewRecordModal(true);
-    console.log('set to true')
   }
   const handleCloseModalClick = () => {
     setShowAddNewRecordModal(false);
@@ -50,10 +49,10 @@ const DayReport = () => {
           onClose={handleCloseModalClick}
         />
       }
-      <DateHeader date={currentDay.toISOString()} />
+      <DateHeader date={currentDay} />
       <WeekCalendar days={days} />
       <DailyActionBar onAddRecord={handleAddRecordClick} />
-      <RecordsList date={new Date()} />
+      <RecordsList date={currentDay} />
     </div>
   )
 }

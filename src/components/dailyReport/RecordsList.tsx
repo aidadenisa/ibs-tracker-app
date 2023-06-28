@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { usePopulateUserRecords } from "../../hooks/records";
-import CategorySection from "../events/CategorySection";
-import EventsList from "../events/EventsList";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { usePopulateUserRecords } from '../../hooks/records';
+import CategorySection from '../events/CategorySection';
+import EventsList from '../events/EventsList';
 
 interface RecordsListProps {
-  date: Date
+  date: string
 }
 
 const RecordsList = ({ date }: RecordsListProps) => {
@@ -13,7 +13,7 @@ const RecordsList = ({ date }: RecordsListProps) => {
   const user = useSelector((state: RootState) => state.user);
   const categories = useSelector((state: RootState) => state.categories);
 
-  const categorizedRecords = usePopulateUserRecords(user, categories, date);
+  const categorizedRecords = usePopulateUserRecords(user, categories, new Date(date));
 
   return (
     <div className="ibs-records-list">

@@ -1,10 +1,9 @@
-import axios, { AxiosResponse } from 'axios';
-import { getRequestConfig, isTimestampPartOfASpecificDate } from './utils';
+import axios from 'axios';
+import { getRequestConfig } from './utils';
 import { User } from '../types';
 import store from '../store';
 import { setUserInfo } from '../reducers/user';
-import { Dictionary } from '@reduxjs/toolkit';
-import { setSelectedEventsIds } from '../reducers/events';
+import recordService from '../services/records';
 
 const BASE_URL = process.env.REACT_APP_API_URL + '/users';
 
@@ -23,16 +22,7 @@ const updateCurrentUserInfo = async (): Promise<void> => {
   const userInfo = await getCurrentUserInfo();
   store.dispatch(setUserInfo(userInfo));
 
-  const selectedEventsIdsArray = userInfo.records && !!userInfo.records.length
-    ? userInfo.records.filter(
-      record => isTimestampPartOfASpecificDate(record.date, new Date())
-    ).map(record => record.event)
-    : [];
-  const selectedEventsIds: Dictionary<boolean> = {};
-  for (let i = 0; i < selectedEventsIdsArray.length; i++) {
-    selectedEventsIds[selectedEventsIdsArray[i]] = true
-  }
-  store.dispatch(setSelectedEventsIds(selectedEventsIds));
+  recordService.updateRecordsForCurrentDay(userInfo);
   return;
 }
 

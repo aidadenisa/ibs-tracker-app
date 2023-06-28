@@ -1,0 +1,10 @@
+.slot {
+  text-align: center;
+  flex: 1 1 0;
+  width: 0;
+  padding: var(--ibs-margin-unit) 0;
+}
+.selected {
+  background-color: var(--ibs-color-primary-light);
+  border-radius: var(--ibs-radius);
+}
