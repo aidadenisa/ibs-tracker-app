@@ -6,6 +6,7 @@ import DateHeader from '../../components/dailyReport/DateHeader';
 import WeekCalendar from '../../components/dailyReport/WeekCalendar';
 import DailyActionBar from '../../components/dailyReport/DailyActionBar';
 import AddNewRecordModal from '../../components/dailyReport/AddNewRecordModal';
+import RecordsList from '../../components/dailyReport/RecordsList';
 
 import { getWeekDaysByDate } from '../../services/utils';
 import categoryService from '../../services/categories';
@@ -52,6 +53,7 @@ const DayReport = () => {
       <DateHeader date={currentDay.toISOString()} />
       <WeekCalendar days={days} />
       <DailyActionBar onAddRecord={handleAddRecordClick} />
+      <RecordsList date={new Date()} />
     </div>
   )
 }

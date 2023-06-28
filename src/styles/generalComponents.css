@@ -89,15 +89,14 @@ h3 {
 .modal__header,
 .modal__body,
 .modal__action-bar {
-  padding: var(--ibs-margin-unit);
+  padding: 0 var(--ibs-margin-unit);
+  margin: var(--ibs-margin-unit) 0;
 }
 
 .modal__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--ibs-margin-unit);
-  border-bottom: 1px solid var(--ibs-color-gray);
 }
 
 .modal__title {

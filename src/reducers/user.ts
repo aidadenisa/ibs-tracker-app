@@ -21,7 +21,7 @@ import { User } from '../types';
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {},
+  initialState: {} as User,
   reducers: {
     setUserInfo(state, action: PayloadAction<User>) {
       return action.payload;

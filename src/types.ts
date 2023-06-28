@@ -3,7 +3,7 @@ interface Category {
   id: string, 
   name: string,
   code: string,
-  events? : Event[]
+  events : Event[]
 }
 interface Event {
   id: string,
@@ -15,8 +15,8 @@ interface Event {
 
 interface UserRecord {
   id: string,
-  event: Event,
-  user: User,
+  event: string,
+  user: string,
   date: string,
 }
 

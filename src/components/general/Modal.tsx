@@ -6,27 +6,24 @@ interface ModalProps {
   title: string,
   primaryBtnLabel: string,
   secondaryBtnLabel?: string,
-  hideHeader?: boolean
   children: ReactNode,
   onClose?: () => void,
   onPrimary?: () => void,
   onSecondary?: () => void,
 }
 
-const Modal = ({ title, primaryBtnLabel, secondaryBtnLabel, hideHeader=false, children, onPrimary, onClose, onSecondary }: ModalProps) => {
+const Modal = ({ title, primaryBtnLabel, secondaryBtnLabel, children, onPrimary, onClose, onSecondary }: ModalProps) => {
 
   return (
     <div className={`modal`}>
-      {
-        !hideHeader && <div className="modal__header">
-          <div className="modal__title">{title}</div>
-          <X className="modal__close-btn"
-            color="var(--ibs-color-gray)"
-            size="24px"
-            onClick={onClose}
-          />
-        </div>
-      }
+      <div className="modal__header">
+        <h2 className="modal__title">{title}</h2>
+        <X className="modal__close-btn"
+          color="var(--ibs-color-gray)"
+          size="24px"
+          onClick={onClose}
+        />
+      </div>
 
       <div className="modal__body">
         {children}

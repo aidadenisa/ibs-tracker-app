@@ -2,12 +2,18 @@ import { Category } from '../../types'
 import CategorySection from '../events/CategorySection'
 import Modal from '../general/Modal'
 import recordService from '../../services/records'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
+import EventsList from '../events/EventsList'
 
 interface AddNewRecordModalProps {
   categories: Category[]
   onClose: () => void,
 }
 const AddNewRecordModal = ({ categories, onClose }: AddNewRecordModalProps) => {
+
+  const selectedEventsIds = useSelector((state: RootState) => state.selectedEventsIds);
+
   const handleSaveRecords = async () => {
     await recordService.saveNewRecords();
     onClose();
@@ -15,17 +21,24 @@ const AddNewRecordModal = ({ categories, onClose }: AddNewRecordModalProps) => {
 
   return (
     <Modal
-      title="Add new record"
+      title="What happened today?"
       primaryBtnLabel="All done"
-      hideHeader={true}
-      onClose={onClose}
+      onClose={handleSaveRecords}
       onPrimary={handleSaveRecords}
     >
-      <h2>What happened today?</h2>
       <div className="new-record__categories">
         {categories && categories.length &&
-          categories.map(category => 
-            <CategorySection category={category} key={category.id} />
+          categories.map(category =>
+            <CategorySection category={category} key={category.id}>
+              {
+                category.events && category.events.length
+                && <EventsList
+                  events={category.events}
+                  canInteract={true}
+                  selectedEventsIds={selectedEventsIds}
+                />
+              }
+            </CategorySection>
           )
         }
       </div>
