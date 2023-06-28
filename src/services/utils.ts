@@ -1,4 +1,5 @@
 import { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
+import { endOfDay, startOfDay } from "date-fns";
 
 const getRequestConfig = (): AxiosRequestConfig => {
   const headers: AxiosRequestHeaders = {} as AxiosRequestHeaders;
@@ -43,10 +44,17 @@ const getFormattedDayName = (day: string): string => {
   return new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(new Date(day));
 }
 
+const isTimestampPartOfASpecificDate = (timestamp: string | number, date: Date) => {
+  const recordDate = new Date(timestamp);
+  return (startOfDay(date).getTime() < recordDate.getTime()) 
+    && (recordDate.getTime() < endOfDay(date).getTime()) 
+}
+
 export {
   getWeekDaysByDate,
   removeDays,
   getRequestConfig,
   getMonthName,
   getFormattedDayName,
+  isTimestampPartOfASpecificDate
 }

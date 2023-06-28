@@ -19,8 +19,7 @@ const login = async (email: string, password: string) => {
     }
     console.log(localStorage.getItem('token'));
     
-    const userInfo = await userService.getCurrentUserInfo();
-    store.dispatch(setUserInfo(userInfo));
+    await userService.updateCurrentUserInfo();
 
     return result;
   } catch(err) {
@@ -42,8 +41,7 @@ const authRedirect = async () => {
     return redirect('/login');
   }
   try {
-    const userInfo = await userService.getCurrentUserInfo();
-    store.dispatch(setUserInfo(userInfo));
+    await userService.updateCurrentUserInfo();
   } catch(err) {
     console.error(err);
     return redirect('/login');

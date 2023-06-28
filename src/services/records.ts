@@ -17,8 +17,12 @@ const createRecord = async (newRecord: NewRecord) => {
 }
 
 const saveNewRecords = async () => {
-  const config = getRequestConfig();
   const { selectedEventsIds } = store.getState();
+  if(selectedEventsIds === undefined || Object.keys(selectedEventsIds).length === 0) {
+    return;
+  }
+  
+  const config = getRequestConfig();
   // TODO: REPLACE THIS WITH CURRENT ACTIVE DATE
   const date = new Date();
 
@@ -26,10 +30,9 @@ const saveNewRecords = async () => {
     dateISO: date.toISOString(),
     selectedEventsIds: Object.keys(selectedEventsIds).filter(key => selectedEventsIds[key])
   }, config);
-  
+
   if(result && result.status === 200) {
-    const result = await userService.getCurrentUserInfo();
-    store.dispatch(setUserInfo(result));
+    await userService.updateCurrentUserInfo();
   }
   return;
 }
