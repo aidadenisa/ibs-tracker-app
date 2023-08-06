@@ -14,6 +14,21 @@
   background-color: var(--ibs-color-stool-light);
 }
 
+.ibs-category-symptom-inverted {
+  color: var(--ibs-color-symptom-light);
+  background-color: var(--ibs-color-symptom);
+}
+
+.ibs-category-menstruation-inverted {
+  color: var(--ibs-color-menstruation-light);
+  background-color: var(--ibs-color-menstruation);
+}
+
+.ibs-category-stool-inverted {
+  color: var(--ibs-color-stool-light);
+  background-color: var(--ibs-color-stool);
+}
+
 /* HEADINGS */
 h1 {
   font-size: var(--ibs-font-size-xl);

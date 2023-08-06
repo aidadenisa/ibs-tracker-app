@@ -8,3 +8,8 @@
   background-color: var(--ibs-color-primary-light);
   border-radius: var(--ibs-radius);
 }
+.categoryLine {
+  height: 3px;
+  width: 100%; 
+  margin: 3px 0;
+}

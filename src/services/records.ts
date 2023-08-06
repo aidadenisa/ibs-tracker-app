@@ -24,11 +24,10 @@ const saveNewRecords = async () => {
   }
   
   const config = getRequestConfig();
-  // TODO: REPLACE THIS WITH CURRENT ACTIVE DATE
-  const date = new Date();
+  const { currentDay } = store.getState();
 
   const result = await axios.post(`${BASE_URL}/multiple`, {
-    dateISO: date.toISOString(),
+    dateISO: currentDay,
     selectedEventsIds: Object.keys(selectedEventsIds).filter(key => selectedEventsIds[key])
   }, config);
 
