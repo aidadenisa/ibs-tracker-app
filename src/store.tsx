@@ -3,6 +3,7 @@ import userReducer from './reducers/user';
 import categoriesReducer from './reducers/categories';
 import eventsReducer from './reducers/events';
 import currentDayReducer from './reducers/currentDay';
+import authReducer from './reducers/auth';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     categories: categoriesReducer,
     selectedEventsIds: eventsReducer,
     currentDay: currentDayReducer,
+    auth: authReducer,
   }
 })
 

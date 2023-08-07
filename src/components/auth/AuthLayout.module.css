@@ -1,11 +1,11 @@
-.loginPage,
+.authPage,
 .actionBar,
 .authForm ,
 .authForm input {
   width: 100%;
 }
 
-.loginPage {
+.authPage {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,3 @@
 .authForm {
   flex-grow: 2;
 }
-

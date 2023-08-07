@@ -3,56 +3,57 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../components/general/Input';
 import Button from '../../components/general/Button';
 import authService from '../../services/auth';
-import { useDispatch } from 'react-redux';
-import { setEmail } from '../../reducers/auth';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import AuthLayout from '../../components/auth/AuthLayout';
 
-const LoginPage = () => {
+const OTPPage = () => {
 
-  const [email, setEmailInput] = useState('');
-  const [password, setPassword] = useState('');
+  const email = useSelector((state: RootState) => state.auth.email);
+  const [otp, setOtp] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState<null | string>(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleLogin = async () => {
     setError(null);
     try {
-      const result = await authService.login(email);
-      if (result && result.status === 200) {
-        dispatch(setEmail(email));
-        return navigate('/validate-otp');
+      const result = await authService.validateOTP({ email, otp });
+      if (result && result.data) {
+        return navigate('/');
       }
     } catch (error) {
-      error instanceof Error && setError(error.message);
+      if(error instanceof Error && error.message) {
+        setError(error.message);
+      } 
     }
   }
 
   useEffect(() => {
-    if (!email || !email.length) {
+    if (!otp || !otp.length) {
       return setIsDisabled(true);
     }
     return setIsDisabled(false);
-  }, [email])
+  }, [otp])
 
   return (
     <AuthLayout
       authForm={
         <>
           <Input
-            id="ibs-input-email"
-            value={email}
-            onChange={({ target }) => setEmailInput(target.value)}
-            type="email"
-            placeholder="Email" />
+            id="ibs-input-pass"
+            value={otp}
+            onChange={({ target }) => setOtp(target.value)}
+            type="password"
+            placeholder="Password">
+          </Input>
           {error && error.length
             && <div className="error">
               Error: {error}
             </div>
           }
           <p className="info-paragraph">
-            We&apos;re going to send you a One Time Password (OTP) on your email address so that you can log in.
+            We sent you an OTP password at <strong>{email}</strong>. Please insert the code here in order to login.
           </p>
         </>
       }
@@ -62,12 +63,7 @@ const LoginPage = () => {
             onClick={handleLogin}
             disabled={isDisabled}
             variant="primary"
-            label="Continue" />
-          <Button
-            variant="secondary"
-            label="Create new account"
-            disabled={isDisabled}
-          ></Button>
+            label="Login" />
         </>
       }
     />
@@ -76,4 +72,4 @@ const LoginPage = () => {
 
 }
 
-export default LoginPage;
+export default OTPPage;

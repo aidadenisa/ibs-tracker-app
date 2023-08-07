@@ -7,6 +7,7 @@ import DayReport from './pages/dailyReport/DayReport';
 
 import authService from './services/auth';
 import store from './store';
+import OTPPage from './pages/login/OTPPage';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,9 @@ const router = createBrowserRouter([
   }, {
     path: '/login',
     element: <LoginPage />,
+  },{
+    path: '/validate-otp',
+    element: <OTPPage />,
   }
 ])
 

@@ -48,6 +48,11 @@ h3 {
   text-transform: uppercase;
 }
 
+/* PARAGRAPHS */
+p.info-paragraph {
+  font-size: var(--ibs-font-size-xs);
+}
+
 /* PAGES */
 .ibs-header {
   margin-top: calc( 2 * var(--ibs-margin-unit));
