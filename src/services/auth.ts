@@ -1,9 +1,7 @@
-import axios, { AxiosError } from 'axios';
-import userService from './user';
-import store from '../store';
-import { setUserInfo } from '../reducers/user';
+import axios from 'axios';
 import { redirect } from 'react-router-dom';
-import { AuthInput } from '../types';
+import { AuthInput } from '@/types';
+import userService from '@/services/user';
 
 const BASE_URL = process.env.REACT_APP_API_URL + '/auth';
 

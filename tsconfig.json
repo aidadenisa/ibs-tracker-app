@@ -23,5 +23,6 @@
   "include": [
     "src",
     "Globals.d.ts"
-  ]
+  ],
+  "extends": "./tsconfig.paths.json"
 }

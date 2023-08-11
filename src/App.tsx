@@ -1,13 +1,13 @@
-import './App.css';
+import '@/App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import LoginPage from './pages/login/LoginPage';
-import DayReport from './pages/dailyReport/DayReport';
+import LoginPage from '@/pages/login/LoginPage';
+import DayReport from '@/pages/dailyReport/DayReport';
 
-import authService from './services/auth';
-import store from './store';
-import OTPPage from './pages/login/OTPPage';
+import authService from '@/services/auth';
+import store from '@/store';
+import OTPPage from '@/pages/login/OTPPage';
 
 const router = createBrowserRouter([
   {

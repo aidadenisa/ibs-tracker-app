@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '@/store';
 
-import DateHeader from '../../components/dailyReport/DateHeader';
-import WeekCalendar from '../../components/dailyReport/WeekCalendar';
-import DailyActionBar from '../../components/dailyReport/DailyActionBar';
-import AddNewRecordModal from '../../components/dailyReport/AddNewRecordModal';
-import RecordsList from '../../components/dailyReport/RecordsList';
+import DateHeader from '@/components/dailyReport/DateHeader';
+import WeekCalendar from '@/components/dailyReport/WeekCalendar';
+import DailyActionBar from '@/components/dailyReport/DailyActionBar';
+import AddNewRecordModal from '@/components/dailyReport/AddNewRecordModal';
+import RecordsList from '@/components/dailyReport/RecordsList';
 
-import { getWeekDaysByDate } from '../../services/utils';
-import categoryService from '../../services/categories';
+import { getWeekDaysByDate } from '@/services/utils';
+import categoryService from '@/services/categories';
+import { setCategories } from '@/reducers/categories';
 
-import styles from './DayReport.module.css';
-import { setCategories } from '../../reducers/categories';
+import styles from '@/pages/dailyReport/DayReport.module.css';
 
 const DayReport = () => {
 

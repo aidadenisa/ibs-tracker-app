@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { getRequestConfig } from './utils';
-import { User } from '../types';
-import store from '../store';
-import { setUserInfo } from '../reducers/user';
-import recordService from '../services/records';
+import { User } from '@/types';
+import store from '@/store';
+import { getRequestConfig } from '@/services/utils';
+import recordService from '@/services/records';
+import { setUserInfo } from '@/reducers/user';
 
 const BASE_URL = process.env.REACT_APP_API_URL + '/users';
 

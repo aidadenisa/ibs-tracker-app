@@ -1,4 +1,4 @@
-import Button from '../general/Button';
+import Button from '@/components/general/Button';
 
 interface DailyActionBarProps {
   onAddRecord: () => void;

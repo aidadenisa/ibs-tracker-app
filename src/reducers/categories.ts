@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Category } from '../types';
-import categoriesService from '../services/categories';
+import { Category } from '@/types';
 
 const categoriesSlice = createSlice({
   name: 'categories',

@@ -1,11 +1,9 @@
-import { MouseEvent, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Event } from '../../types';
-import styles from './EventsList.module.css';
-import EventTag from './EventTag';
-import { RootState } from '../../store';
-import { toggleEventSelectedState } from '../../reducers/events';
+import { useDispatch } from 'react-redux';
 import { Dictionary } from '@reduxjs/toolkit';
+import { Event } from '@/types';
+import styles from '@/components/events/EventsList.module.css';
+import EventTag from '@/components/events/EventTag';
+import { toggleEventSelectedState } from '@/reducers/events';
 
 interface EventsListProps {
   events: Event[],

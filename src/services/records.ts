@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { areSameDays, getRequestConfig } from './utils';
-import { NewRecord, User, UserRecord } from '../types';
-import store from '../store';
-import userService from './user';
 import { Dictionary } from '@reduxjs/toolkit';
-import { setSelectedEventsIds } from '../reducers/events';
+import store from '@/store';
+import { NewRecord, User, UserRecord } from '@/types';
+import { areSameDays, getRequestConfig } from '@/services/utils';
+import userService from '@/services/user';
+import { setSelectedEventsIds } from '@/reducers/events';
+
 const BASE_URL = process.env.REACT_APP_API_URL + '/records';
 
 const getRecords = async (id: string): Promise<UserRecord> => {

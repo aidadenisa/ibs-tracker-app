@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getFormattedDayName } from '../../services/utils';
-import { RootState } from '../../store';
 import { isSameDay } from 'date-fns';
-import styles from './WeekCalendar.module.css';
-import { setCurrentDay } from '../../reducers/currentDay';
-import recordService from '../../services/records';
-import { usePopulateUserRecords } from '../../hooks/records';
-import { Category } from '../../types';
+import { Category } from '@/types';
+import { RootState } from '@/store';
+import recordService from '@/services/records';
+import { getFormattedDayName } from '@/services/utils';
+import { usePopulateUserRecords } from '@/hooks/records';
+import { setCurrentDay } from '@/reducers/currentDay';
+import styles from '@/components/dailyReport/WeekCalendar.module.css';
 
 interface WeekCalendarProps {
   days: string[],

@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { usePopulateUserRecords } from '../../hooks/records';
-import CategorySection from '../events/CategorySection';
-import EventsList from '../events/EventsList';
+import { RootState } from '@/store';
+import { usePopulateUserRecords } from '@/hooks/records';
+import CategorySection from '@/components/events/CategorySection';
+import EventsList from '@/components/events/EventsList';
 
 interface RecordsListProps {
   date: string

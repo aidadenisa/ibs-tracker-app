@@ -1,7 +1,6 @@
-import { Category } from '../../types';
-import EventsList from './EventsList';
-import styles from './CategorySection.module.css';
 import { ReactNode } from 'react';
+import { Category } from '@/types';
+import styles from '@/components/events/CategorySection.module.css';
 
 interface CategorySectionProps {
   category: Category, 

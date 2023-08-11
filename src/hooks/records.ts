@@ -1,5 +1,5 @@
-import { areSameDays } from '../services/utils';
-import { Category, User } from '../types';
+import { areSameDays } from '@/services/utils';
+import { Category, User } from '@/types';
 
 const usePopulateUserRecords = (user: User, categories: Category[], date: Date ): Category[] => {
   // category > record > event

@@ -1,5 +1,5 @@
 import { MouseEvent } from 'react';
-import { Event } from '../../types';
+import { Event } from '@/types';
 
 interface EventTagProps {
   event: Event,

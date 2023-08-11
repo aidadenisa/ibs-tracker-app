@@ -1,5 +1,5 @@
-import styles from './AuthLayout.module.css';
-import logo from '../../assets/img/IBS_logo.svg';
+import styles from '@/components/auth/AuthLayout.module.css';
+import logo from '@/assets/img/IBS_logo.svg';
 import { ReactNode } from 'react';
 
 type AuthLayoutProps = {

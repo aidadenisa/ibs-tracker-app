@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Modal from '../components/general/Modal';
+import Modal from '@/components/general/Modal';
 
 describe('<Modal/>', () => {
   test('renders', async () => {

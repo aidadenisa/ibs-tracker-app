@@ -1,10 +1,10 @@
-import { Category } from '../../types'
-import CategorySection from '../events/CategorySection'
-import Modal from '../general/Modal'
-import recordService from '../../services/records'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
-import EventsList from '../events/EventsList'
+import { Category } from '@/types'
+import { RootState } from '@/store'
+import recordService from '@/services/records'
+import Modal from '@/components/general/Modal'
+import CategorySection from '@/components/events/CategorySection'
+import EventsList from '@/components/events/EventsList'
 
 interface AddNewRecordModalProps {
   categories: Category[]
