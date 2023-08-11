@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { getRequestConfig } from '@/services/utils';
 import { Category } from '@/types';
+import { API_URL } from '@/config';
 
-const BASE_URL = process.env.REACT_APP_API_URL + '/categories';
+const BASE_URL = API_URL + '/categories';
 
 const getCategoriesWithEvents = async (): Promise<Category[]> => {
   return (await axios.get(BASE_URL + '?populate=true', getRequestConfig())).data;

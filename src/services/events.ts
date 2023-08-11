@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { getRequestConfig } from '@/services/utils';
+import { API_URL } from '@/config';
 
-const BASE_URL = process.env.REACT_APP_API_URL + '/events';
+const BASE_URL = API_URL + '/events';
 
 const getEvents = async (): Promise<Event> => {
   const config = getRequestConfig();

@@ -5,8 +5,9 @@ import { NewRecord, User, UserRecord } from '@/types';
 import { areSameDays, getRequestConfig } from '@/services/utils';
 import userService from '@/services/user';
 import { setSelectedEventsIds } from '@/reducers/events';
+import { API_URL } from '@/config';
 
-const BASE_URL = process.env.REACT_APP_API_URL + '/records';
+const BASE_URL = API_URL + '/records';
 
 const getRecords = async (id: string): Promise<UserRecord> => {
   const config = getRequestConfig();

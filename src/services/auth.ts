@@ -2,8 +2,9 @@ import axios from 'axios';
 import { redirect } from 'react-router-dom';
 import { AuthInput } from '@/types';
 import userService from '@/services/user';
+import { API_URL } from '@/config';
 
-const BASE_URL = process.env.REACT_APP_API_URL + '/auth';
+const BASE_URL = API_URL + '/auth';
 
 const login = async (email: string) => { 
   try {

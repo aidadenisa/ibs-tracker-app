@@ -4,8 +4,9 @@ import store from '@/store';
 import { getRequestConfig } from '@/services/utils';
 import recordService from '@/services/records';
 import { setUserInfo } from '@/reducers/user';
+import { API_URL } from '@/config';
 
-const BASE_URL = process.env.REACT_APP_API_URL + '/users';
+const BASE_URL = API_URL + '/users';
 
 const getCurrentUserInfo = async (): Promise<User> => {
   const config = getRequestConfig();
