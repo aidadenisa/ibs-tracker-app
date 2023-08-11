@@ -2,7 +2,7 @@ import axios from 'axios';
 import { User } from '@/types';
 import store from '@/store';
 import { getRequestConfig } from '@/services/utils';
-import recordService from '@/services/records';
+import recordService from '@/features/records/services/records';
 import { setUserInfo } from '@/reducers/user';
 import { API_URL } from '@/config';
 
@@ -19,7 +19,6 @@ const getCurrentUserInfo = async (): Promise<User> => {
 }
 
 const updateCurrentUserInfo = async (): Promise<void> => {
-  // TODO: REPLACE NEW DATE WITH APPLICATION CURRENT DATE FROM STORE
   const userInfo = await getCurrentUserInfo();
   store.dispatch(setUserInfo(userInfo));
 

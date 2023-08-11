@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { redirect } from 'react-router-dom';
-import { AuthInput } from '@/types';
+import { AuthInput } from '@/features/auth/types';
 import userService from '@/services/user';
 import { API_URL } from '@/config';
 

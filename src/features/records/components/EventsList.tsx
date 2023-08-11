@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { Dictionary } from '@reduxjs/toolkit';
 import { Event } from '@/types';
-import styles from '@/components/events/EventsList.module.css';
-import EventTag from '@/components/events/EventTag';
-import { toggleEventSelectedState } from '@/reducers/events';
+import styles from '@/features/records/components/styles/EventsList.module.css';
+import EventTag from '@/features/records/components/EventTag';
+import { toggleEventSelectedState } from '@/features/records/reducers/events';
 
 interface EventsListProps {
   events: Event[],

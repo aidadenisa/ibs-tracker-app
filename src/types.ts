@@ -33,16 +33,10 @@ interface User {
   records: UserRecord[],
 }
 
-interface AuthInput {
-  email: string,
-  otp: string,
-}
-
 export type {
   Category,
   Event,
   UserRecord,
   NewRecord,
   User,
-  AuthInput
 }

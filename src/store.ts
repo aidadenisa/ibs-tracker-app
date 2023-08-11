@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '@/reducers/user';
-import categoriesReducer from '@/reducers/categories';
-import eventsReducer from '@/reducers/events';
-import currentDayReducer from '@/reducers/currentDay';
-import authReducer from '@/reducers/auth';
+import categoriesReducer from '@/features/records/reducers/categories';
+import eventsReducer from '@/features/records/reducers/events';
+import currentDayReducer from '@/features/dayReport/reducers/currentDay';
+import authReducer from '@/features/auth/reducers/auth';
 
 const store = configureStore({
   reducer: {

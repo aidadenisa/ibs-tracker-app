@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Button from '@/components/general/Button';
+import Button from '@/components/Button';
 import { X } from 'phosphor-react';
 interface ModalProps {
   // show: boolean,

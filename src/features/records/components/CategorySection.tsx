@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Category } from '@/types';
-import styles from '@/components/events/CategorySection.module.css';
+import styles from '@/features/records/components/styles/CategorySection.module.css';
 
 interface CategorySectionProps {
   category: Category, 

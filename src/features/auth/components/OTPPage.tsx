@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Input from '@/components/general/Input';
-import Button from '@/components/general/Button';
-import authService from '@/services/auth';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import authService from '@/features/auth/services/auth';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import AuthLayout from '@/components/auth/AuthLayout';
+import AuthLayout from '@/features/auth/components/AuthLayout';
 
 const OTPPage = () => {
 

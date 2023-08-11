@@ -1,4 +1,4 @@
-import styles from '@/components/auth/AuthLayout.module.css';
+import styles from '@/features/auth/components/styles/AuthLayout.module.css';
 import logo from '@/assets/img/IBS_logo.svg';
 import { ReactNode } from 'react';
 

@@ -2,11 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isSameDay } from 'date-fns';
 import { Category } from '@/types';
 import { RootState } from '@/store';
-import recordService from '@/services/records';
 import { getFormattedDayName } from '@/services/utils';
-import { usePopulateUserRecords } from '@/hooks/records';
-import { setCurrentDay } from '@/reducers/currentDay';
-import styles from '@/components/dailyReport/WeekCalendar.module.css';
+import { usePopulateUserRecords } from '@/features/records/hooks/records';
+import { setCurrentDay } from '@/features/dayReport/reducers/currentDay';
+import styles from '@/features/weekCalendar/components/styles/WeekCalendar.module.css';
+
+// TODO: think better about how to achieve this without coupling this service here
+import recordService from '@/features/records/services/records';
 
 interface WeekCalendarProps {
   days: string[],
@@ -41,7 +43,7 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
   }
 
   const handleChangeDay = (day: string) => {
-    dispatch(setCurrentDay(day))
+    dispatch(setCurrentDay(day));
     recordService.updateRecordsForCurrentDay(user);
   }
 

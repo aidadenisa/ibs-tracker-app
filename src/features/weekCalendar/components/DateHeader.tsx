@@ -1,4 +1,4 @@
-import styles from '@/components/dailyReport/DateHeader.module.css';
+import styles from '@/features/weekCalendar/components/styles/DateHeader.module.css';
 
 interface DateProps {
   date: string,

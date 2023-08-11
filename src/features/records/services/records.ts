@@ -4,7 +4,7 @@ import store from '@/store';
 import { NewRecord, User, UserRecord } from '@/types';
 import { areSameDays, getRequestConfig } from '@/services/utils';
 import userService from '@/services/user';
-import { setSelectedEventsIds } from '@/reducers/events';
+import { setSelectedEventsIds } from '@/features/records/reducers/events';
 import { API_URL } from '@/config';
 
 const BASE_URL = API_URL + '/records';

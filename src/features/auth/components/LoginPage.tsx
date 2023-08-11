@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Input from '@/components/general/Input';
-import Button from '@/components/general/Button';
-import AuthLayout from '@/components/auth/AuthLayout';
-import authService from '@/services/auth';
-import { setEmail } from '@/reducers/auth';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import AuthLayout from '@/features/auth/components/AuthLayout';
+import authService from '@/features/auth/services/auth';
+import { setEmail } from '@/features/auth/reducers/auth';
 
 const LoginPage = () => {
 
