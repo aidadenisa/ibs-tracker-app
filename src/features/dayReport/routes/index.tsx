@@ -1,11 +1,10 @@
 import DayReport from '@/features/dayReport/components/DayReport';
-import authService from '@/features/auth/services/auth';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const routes = [
   {
     path: '/',
-    element: <DayReport />,
-    loader: authService.authRedirect
+    element: <ProtectedRoute><DayReport /></ProtectedRoute>,
   }, 
 ];
 
