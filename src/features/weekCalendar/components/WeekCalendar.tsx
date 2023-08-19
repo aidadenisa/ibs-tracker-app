@@ -3,7 +3,6 @@ import { isSameDay } from 'date-fns';
 import { Category } from '@/types';
 import { RootState } from '@/store';
 import { getFormattedDayName } from '@/features/weekCalendar/utils';
-import { usePopulateUserRecords } from '@/features/records/hooks/records';
 import { setCurrentDay } from '@/features/dayReport/reducers/currentDay';
 import styles from '@/features/weekCalendar/components/styles/WeekCalendar.module.css';
 
@@ -32,7 +31,7 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
   }
 
   const getCategorizedRecordsForDay = (day: string) => {
-    return usePopulateUserRecords(user, categories, new Date(day))
+    return recordService.populateUserRecords(user, categories, new Date(day))
   }
 
   const getCategoryClassname = (category: Category) => {

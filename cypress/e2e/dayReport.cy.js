@@ -1,4 +1,5 @@
 import { getWeekDaysByDate, getFormattedDayName } from '@/services/utils';
+import tokenService from '@/services/token';
 /**
  * Cypress commands always return undefined, so button.click() in the above code would cause an error. An attempt to start the debugger would not stop the code between executing the commands, but before any commands have been executed.
  * Cypress commands are like promises, so if we want to access their return values, we have to do it using the then command. For example, the following test would print the number of buttons in the application, and click the first button:
@@ -11,7 +12,7 @@ describe('Day Report', function() {
   });
 
   it('shows the current day', function() {
-    expect(localStorage.getItem('token'));
+    expect(tokenService.getToken());
     const date = new Date();
     cy.get('div[class*=DateHeader]').contains(date.getDate());
     cy.get('div[class*=DateHeader]').contains(new Intl.DateTimeFormat('en-GB', { month : 'long'}).format(date));

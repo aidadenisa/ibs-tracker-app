@@ -1,10 +1,12 @@
+import tokenService from '@/services/token';
+
 Cypress.Commands.add('login', ({ email, password }) => {
   cy.request('POST', `${Cypress.env('API_URL')}/auth/login`, {
     email: email,
     pass: password
   }).then(result => {
     if (result && result.body) {
-      localStorage.setItem('token', result.body.token);
+      tokenService.setToken(result.body.token);
       return cy.visit('/')
     } else {
       cy.visit('/login')

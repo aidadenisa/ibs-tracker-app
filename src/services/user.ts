@@ -1,7 +1,6 @@
-import axios from 'axios';
 import { User } from '@/types';
 import store from '@/store';
-import { getRequestConfig } from '@/utils/api';
+import api from '@/lib/api';
 import recordService from '@/features/records/services/records';
 import { setUserInfo } from '@/reducers/user';
 import { API_URL } from '@/config';
@@ -9,9 +8,8 @@ import { API_URL } from '@/config';
 const BASE_URL = API_URL + '/users';
 
 const getCurrentUserInfo = async (): Promise<User> => {
-  const config = getRequestConfig();
   try {
-    const result = await axios.get(`${BASE_URL}/currentUser?populate=true`, config)
+    const result = await api.get(`${BASE_URL}/currentUser?populate=true`)
     return result ? result.data : null;
   } catch (err) {
     throw new Error(`There has been a problem retrieving user's data`);
@@ -28,5 +26,5 @@ const updateCurrentUserInfo = async (): Promise<void> => {
 
 export default {
   getCurrentUserInfo,
-  updateCurrentUserInfo
+  updateCurrentUserInfo,
 }

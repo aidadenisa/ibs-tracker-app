@@ -1,10 +1,9 @@
-import axios from 'axios';
 import { Dictionary } from '@reduxjs/toolkit';
 import store from '@/store';
-import { User, UserRecord } from '@/types';
+import { User, UserRecord, Category } from '@/types';
 import { NewRecord } from '@/features/records/types';
 import { areSameDays } from '@/features/records/utils';
-import { getRequestConfig } from '@/utils/api';
+import api from '@/lib/api';
 import userService from '@/services/user';
 import { setSelectedEventsIds } from '@/features/records/reducers/events';
 import { API_URL } from '@/config';
@@ -12,13 +11,11 @@ import { API_URL } from '@/config';
 const BASE_URL = API_URL + '/records';
 
 const getRecords = async (id: string): Promise<UserRecord> => {
-  const config = getRequestConfig();
-  return (await axios.get(`${BASE_URL}/${id}`, config)).data;
+  return (await api.get(`${BASE_URL}/${id}`)).data;
 }
 
 const createRecord = async (newRecord: NewRecord) => {
-  const config = getRequestConfig();
-  return (await axios.post(BASE_URL, newRecord, config)).data;
+  return (await api.post(BASE_URL, newRecord)).data;
 }
 
 const saveNewRecords = async () => {
@@ -27,13 +24,12 @@ const saveNewRecords = async () => {
     return;
   }
   
-  const config = getRequestConfig();
   const { currentDay } = store.getState();
 
-  const result = await axios.post(`${BASE_URL}/multiple`, {
+  const result = await api.post(`${BASE_URL}/multiple`, {
     dateISO: currentDay,
     selectedEventsIds: Object.keys(selectedEventsIds).filter(key => selectedEventsIds[key])
-  }, config);
+  });
 
   if(result && result.status === 200) {
     await userService.updateCurrentUserInfo();
@@ -57,9 +53,35 @@ const updateRecordsForCurrentDay = (userInfo: User) => {
 }
 
 
+const populateUserRecords = (user: User, categories: Category[], date: Date ): Category[] => {
+  // category > record > event
+
+  // get event ids of the records saved on this specific date
+  const activeRecordsEventsIds = user.records.filter(record => 
+    areSameDays(new Date(record.date), date)
+  ).map(record => record.event);
+
+  // create a new array of categories that only contain event information 
+  // for the event ids filtered above
+  const currentCategoryAndEvents: Category[] = [];
+
+  for(let i = 0; i < categories.length; i++ ) {
+    if(categories[i] && categories[i].events) {
+      const selectedEvents = categories[i].events.filter(event => activeRecordsEventsIds.indexOf(event.id) > -1)
+      currentCategoryAndEvents.push({
+        ...categories[i],
+        events: selectedEvents
+      })
+    }
+  }
+
+  return currentCategoryAndEvents
+}
+
 export default {
   getRecords, 
   createRecord,
   saveNewRecords,
-  updateRecordsForCurrentDay
+  updateRecordsForCurrentDay,
+  populateUserRecords,
 }
