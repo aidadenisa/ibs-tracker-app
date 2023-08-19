@@ -20,10 +20,6 @@ interface UserRecord {
   date: string,
 }
 
-interface NewRecord {
-  eventId: string,
-}
-
 interface User {
   firstName: string,
   lastName: string,
@@ -36,7 +32,6 @@ interface User {
 export type {
   Category,
   Event,
-  UserRecord,
-  NewRecord,
   User,
+  UserRecord,
 }

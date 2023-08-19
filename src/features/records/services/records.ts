@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { Dictionary } from '@reduxjs/toolkit';
 import store from '@/store';
-import { NewRecord, User, UserRecord } from '@/types';
-import { areSameDays, getRequestConfig } from '@/services/utils';
+import { User, UserRecord } from '@/types';
+import { NewRecord } from '@/features/records/types';
+import { areSameDays } from '@/features/records/utils';
+import { getRequestConfig } from '@/utils/api';
 import userService from '@/services/user';
 import { setSelectedEventsIds } from '@/features/records/reducers/events';
 import { API_URL } from '@/config';

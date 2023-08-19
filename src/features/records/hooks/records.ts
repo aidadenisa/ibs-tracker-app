@@ -1,4 +1,4 @@
-import { areSameDays } from '@/services/utils';
+import { areSameDays } from '@/features/records/utils';
 import { Category, User } from '@/types';
 
 const usePopulateUserRecords = (user: User, categories: Category[], date: Date ): Category[] => {

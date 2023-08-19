@@ -8,7 +8,7 @@ import DailyActionBar from '@/features/records/components/DailyActionBar';
 import AddNewRecordModal from '@/features/records/components/AddNewRecordModal';
 import RecordsList from '@/features/records/components/RecordsList';
 
-import { getWeekDaysByDate } from '@/services/utils';
+import { getWeekDaysByDate } from '@/features/dayReport/utils';
 import categoryService from '@/features/records/services/categories';
 import { setCategories } from '@/features/records/reducers/categories';
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { User } from '@/types';
 import store from '@/store';
-import { getRequestConfig } from '@/services/utils';
+import { getRequestConfig } from '@/utils/api';
 import recordService from '@/features/records/services/records';
 import { setUserInfo } from '@/reducers/user';
 import { API_URL } from '@/config';

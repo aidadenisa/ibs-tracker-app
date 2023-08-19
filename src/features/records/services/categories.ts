@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getRequestConfig } from '@/services/utils';
+import { getRequestConfig } from '@/utils/api';
 import { Category } from '@/types';
 import { API_URL } from '@/config';
 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isSameDay } from 'date-fns';
 import { Category } from '@/types';
 import { RootState } from '@/store';
-import { getFormattedDayName } from '@/services/utils';
+import { getFormattedDayName } from '@/features/weekCalendar/utils';
 import { usePopulateUserRecords } from '@/features/records/hooks/records';
 import { setCurrentDay } from '@/features/dayReport/reducers/currentDay';
 import styles from '@/features/weekCalendar/components/styles/WeekCalendar.module.css';

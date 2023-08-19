@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getRequestConfig } from '@/services/utils';
+import { getRequestConfig } from '@/utils/api';
 import { API_URL } from '@/config';
 
 const BASE_URL = API_URL + '/events';

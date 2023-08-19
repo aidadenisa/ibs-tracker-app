@@ -1,4 +1,4 @@
-import { getWeekDaysByDate, removeDays } from '@/services/utils';
+import { getWeekDaysByDate, removeDays } from '@/utils/date';
 
 describe('removeDays', () => {
   test('returns a date object', () => {
