@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import userService from '@/services/user';
 import { UserConfig } from '@/types';
 import tokenService from '@/services/token';
+import { redirect } from 'react-router-dom';
 
 interface AuthState {
   user: UserConfig, 
@@ -17,10 +18,14 @@ const useAuthentication = (): AuthState => {
   const [loading, setLoading] = useState(true);
   const token = tokenService.getToken();
 
-  const isLoggedIn = useMemo(() => !user || !Object.keys(user).length, [user]);
+  const isLoggedIn = useMemo(() => user && !!Object.keys(user).length, [user]);
 
   useEffect(() => {
-    if (!token || !token.length) return;
+    if (!token || !token.length) {
+      setLoading(false);
+      redirect('/login');
+      return;
+    }
 
     if (!user || !Object.keys(user).length) {
       updateUser()
