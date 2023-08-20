@@ -15,7 +15,10 @@ const AddNewRecordModal = ({ categories, onClose }: AddNewRecordModalProps) => {
   const selectedEventsIds = useSelector((state: RootState) => state.selectedEventsIds);
 
   const handleSaveRecords = async () => {
-    await recordService.saveNewRecords();
+    const result = await recordService.saveNewRecords();
+    if(result && result.status === 200) {
+      await recordService.refreshRecords();
+    }
     onClose();
   }
 

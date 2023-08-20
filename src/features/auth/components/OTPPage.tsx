@@ -6,6 +6,7 @@ import authService from '@/features/auth/services/auth';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import AuthLayout from '@/features/auth/components/AuthLayout';
+import useAuth from '@/features/auth/hooks/useAuth';
 
 const OTPPage = () => {
 
@@ -15,11 +16,14 @@ const OTPPage = () => {
   const [error, setError] = useState<null | string>(null);
   const navigate = useNavigate();
 
+  const { updateUser } = useAuth();
+
   const handleLogin = async () => {
     setError(null);
     try {
       const result = await authService.validateOTP({ email, otp });
       if (result && result.data) {
+        updateUser();
         return navigate('/');
       }
     } catch (error) {

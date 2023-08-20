@@ -18,7 +18,6 @@ const DayReport = () => {
 
   const dispatch = useDispatch();
 
-  const user = useSelector((state: RootState) => state.user);
   const categories = useSelector((state: RootState) => state.categories);
   const currentDay = useSelector((state: RootState) => state.currentDay);
   

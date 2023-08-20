@@ -1,10 +1,7 @@
 import { User } from '@/types';
-import store from '@/store';
 import api from '@/lib/api';
 import recordService from '@/features/records/services/records';
-import { setUserInfo } from '@/reducers/user';
 import { API_URL } from '@/config';
-import { setRecords } from '@/features/records/reducers/records';
 
 const BASE_URL = API_URL + '/users';
 
@@ -17,16 +14,13 @@ const getCurrentUserInfo = async (): Promise<User> => {
   }
 }
 
-const updateCurrentUserInfo = async (): Promise<void> => {
-  const { records, ...userInfo } = await getCurrentUserInfo();
-  store.dispatch(setUserInfo(userInfo));
-  store.dispatch(setRecords(records));
-
-  recordService.updateRecordsForCurrentDay(records);
-  return;
+const refreshLoggedInUserData = async (): Promise<User> => {
+  const user = await getCurrentUserInfo();
+  recordService.updateRecordsState(user.records);
+  return user;
 }
 
 export default {
   getCurrentUserInfo,
-  updateCurrentUserInfo,
+  refreshLoggedInUserData,
 }

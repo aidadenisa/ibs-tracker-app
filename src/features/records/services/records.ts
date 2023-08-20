@@ -1,12 +1,12 @@
 import { Dictionary } from '@reduxjs/toolkit';
+import api from '@/lib/api';
 import store from '@/store';
-import { User, Record, Category } from '@/types';
+import { API_URL } from '@/config';
+import { Record, Category } from '@/types';
 import { NewRecord } from '@/features/records/types';
 import { areSameDays } from '@/features/records/utils';
-import api from '@/lib/api';
-import userService from '@/services/user';
 import { setSelectedEventsIds } from '@/features/records/reducers/events';
-import { API_URL } from '@/config';
+import { setRecords } from '@/features/records/reducers/records';
 
 const BASE_URL = API_URL + '/records';
 
@@ -31,10 +31,7 @@ const saveNewRecords = async () => {
     selectedEventsIds: Object.keys(selectedEventsIds).filter(key => selectedEventsIds[key])
   });
 
-  if(result && result.status === 200) {
-    await userService.updateCurrentUserInfo();
-  }
-  return;
+  return result;
 }
 
 const updateRecordsForCurrentDay = (records: Record[]) => {
@@ -78,10 +75,30 @@ const populateUserRecords = (records: Record[], categories: Category[], date: Da
   return currentCategoryAndEvents
 }
 
+const updateRecordsState = (records: Record[]) => {
+  store.dispatch(setRecords(records));
+  updateRecordsForCurrentDay(records);
+}
+
+const refreshRecords = async () => {
+  try {
+    const result = await api.get(`${API_URL}/users/currentUser?populate=true`)
+    if(result && result.data && result.data.records) {
+      updateRecordsState(result.data.records)
+      return result.data.records;
+    }
+    return;
+  } catch (err) {
+    throw new Error(`There has been a problem retrieving the records`);
+  }
+}
+
 export default {
   getRecords, 
   createRecord,
   saveNewRecords,
   updateRecordsForCurrentDay,
   populateUserRecords,
+  updateRecordsState,
+  refreshRecords,
 }

@@ -27,7 +27,6 @@ const validateOTP = async (authInput: AuthInput) => {
     if(result && result.status === 200 && result.data && result.data.token) {
       tokenService.setToken(result.data.token);
     }
-    await userService.updateCurrentUserInfo();
     return result;
 
   } catch(err) {
