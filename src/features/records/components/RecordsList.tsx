@@ -3,6 +3,7 @@ import { RootState } from '@/store';
 import recordService from '@/features/records/services/records';
 import CategorySection from '@/features/records/components/CategorySection';
 import EventsList from '@/features/records/components/EventsList';
+import { useMemo } from 'react';
 
 interface RecordsListProps {
   date: string
@@ -13,7 +14,11 @@ const RecordsList = ({ date }: RecordsListProps) => {
   const categories = useSelector((state: RootState) => state.categories);
   const records = useSelector((state: RootState) => state.records);
 
-  const categorizedRecords = recordService.populateUserRecords(records, categories, new Date(date));
+  // useMemo to perform some expensive computation only when needed
+  const categorizedRecords = useMemo(
+    () => recordService.populateUserRecords(records, categories, new Date(date)),
+    [ date, records, categories ]
+  );
 
   return (
     <div className="ibs-records-list">

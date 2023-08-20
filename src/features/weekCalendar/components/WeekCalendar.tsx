@@ -8,6 +8,7 @@ import styles from '@/features/weekCalendar/components/styles/WeekCalendar.modul
 
 // TODO: think better about how to achieve this without coupling this service here
 import recordService from '@/features/records/services/records';
+import { useMemo } from 'react';
 
 interface WeekCalendarProps {
   days: string[],
@@ -18,7 +19,21 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categories);
   const currentDay = useSelector((state: RootState) => state.currentDay);
-  const records = useSelector((state: RootState) => state.records)
+  const records = useSelector((state: RootState) => state.records);
+
+  // useMemo to perform some expensive computation only when needed
+  const categoriesToDisplay = useMemo(
+    () => {
+      const dayCategories = new Map<string, Category[]>();
+      if(!categories || !categories.length || !records || !records.length) return dayCategories;
+
+      for (let i = 0; i < days.length; i++) {
+        dayCategories.set(days[i], recordService.populateUserRecords(records, categories, new Date(days[i])))
+      }
+      return dayCategories;
+    },
+    [days, categories, records]
+  );
 
   const formattedDate = (day: string): number => {
     return (new Date(day)).getDate();
@@ -28,10 +43,6 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
     return isSameDay(new Date(day), new Date(currentDay))
       ? styles.selected
       : '';
-  }
-
-  const getCategorizedRecordsForDay = (day: string) => {
-    return recordService.populateUserRecords(records, categories, new Date(day))
   }
 
   const getCategoryClassname = (category: Category) => {
@@ -60,7 +71,7 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
             </div>
             <div className="week-calendar__day-name">{getFormattedDayName(day)}</div>
             {
-              getCategorizedRecordsForDay(day).map(category =>
+              categoriesToDisplay.has(day) && categoriesToDisplay.get(day)?.map(category =>
                 <div
                   className={getCategoryClassname(category)}
                   key={category.id}
