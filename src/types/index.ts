@@ -1,3 +1,5 @@
+import { User } from "phosphor-react"
+
 // NOTE: THE PROPS WITH __ IN FRONT ARE ONLY USED IN THE FRONTEND (NOT FROM THE DB)
 interface Category {
   id: string, 
@@ -13,25 +15,30 @@ interface Event {
   __selected: boolean,
 }
 
-interface UserRecord {
+interface Record {
   id: string,
   event: string,
   user: string,
   date: string,
 }
 
-interface User {
+interface UserConfig {
   firstName: string,
   lastName: string,
   email: string,
   hasMenstruationSupport: boolean,
   registeredOn: string,
-  records: UserRecord[],
 }
+
+interface User extends UserConfig{
+  records: Record[],
+}
+
 
 export type {
   Category,
   Event,
   User,
-  UserRecord,
+  UserConfig,
+  Record,
 }

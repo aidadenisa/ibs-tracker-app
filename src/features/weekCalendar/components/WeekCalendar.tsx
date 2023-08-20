@@ -18,7 +18,7 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categories);
   const currentDay = useSelector((state: RootState) => state.currentDay);
-  const user = useSelector((state: RootState) => state.user)
+  const records = useSelector((state: RootState) => state.records)
 
   const formattedDate = (day: string): number => {
     return (new Date(day)).getDate();
@@ -31,7 +31,7 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
   }
 
   const getCategorizedRecordsForDay = (day: string) => {
-    return recordService.populateUserRecords(user, categories, new Date(day))
+    return recordService.populateUserRecords(records, categories, new Date(day))
   }
 
   const getCategoryClassname = (category: Category) => {
@@ -43,7 +43,7 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
 
   const handleChangeDay = (day: string) => {
     dispatch(setCurrentDay(day));
-    recordService.updateRecordsForCurrentDay(user);
+    recordService.updateRecordsForCurrentDay(records);
   }
 
   return (

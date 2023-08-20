@@ -1,6 +1,6 @@
 import { Dictionary } from '@reduxjs/toolkit';
 import store from '@/store';
-import { User, UserRecord, Category } from '@/types';
+import { User, Record, Category } from '@/types';
 import { NewRecord } from '@/features/records/types';
 import { areSameDays } from '@/features/records/utils';
 import api from '@/lib/api';
@@ -10,7 +10,7 @@ import { API_URL } from '@/config';
 
 const BASE_URL = API_URL + '/records';
 
-const getRecords = async (id: string): Promise<UserRecord> => {
+const getRecords = async (id: string): Promise<Record[]> => {
   return (await api.get(`${BASE_URL}/${id}`)).data;
 }
 
@@ -37,11 +37,11 @@ const saveNewRecords = async () => {
   return;
 }
 
-const updateRecordsForCurrentDay = (userInfo: User) => {
+const updateRecordsForCurrentDay = (records: Record[]) => {
   const currentDay = store.getState().currentDay;
 
-  const selectedEventsIdsArray = userInfo.records && !!userInfo.records.length
-    ? userInfo.records.filter(
+  const selectedEventsIdsArray = records && !!records.length
+    ? records.filter(
       record => areSameDays(new Date(record.date), new Date(currentDay))
     ).map(record => record.event)
     : [];
@@ -53,11 +53,11 @@ const updateRecordsForCurrentDay = (userInfo: User) => {
 }
 
 
-const populateUserRecords = (user: User, categories: Category[], date: Date ): Category[] => {
+const populateUserRecords = (records: Record[], categories: Category[], date: Date ): Category[] => {
   // category > record > event
 
   // get event ids of the records saved on this specific date
-  const activeRecordsEventsIds = user.records.filter(record => 
+  const activeRecordsEventsIds = records.filter(record => 
     areSameDays(new Date(record.date), date)
   ).map(record => record.event);
 

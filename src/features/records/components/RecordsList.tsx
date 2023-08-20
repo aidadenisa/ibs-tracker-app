@@ -10,10 +10,10 @@ interface RecordsListProps {
 
 const RecordsList = ({ date }: RecordsListProps) => {
 
-  const user = useSelector((state: RootState) => state.user);
   const categories = useSelector((state: RootState) => state.categories);
+  const records = useSelector((state: RootState) => state.records);
 
-  const categorizedRecords = recordService.populateUserRecords(user, categories, new Date(date));
+  const categorizedRecords = recordService.populateUserRecords(records, categories, new Date(date));
 
   return (
     <div className="ibs-records-list">

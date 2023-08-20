@@ -17,13 +17,13 @@
 // }
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { User } from '@/types';
+import { UserConfig } from '@/types';
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {} as User,
+  initialState: {} as UserConfig,
   reducers: {
-    setUserInfo(state, action: PayloadAction<User>) {
+    setUserInfo(state, action: PayloadAction<UserConfig>) {
       return action.payload;
     },
   }

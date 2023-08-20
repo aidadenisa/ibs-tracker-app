@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '@/reducers/user';
+import recordsReducer from '@/features/records/reducers/records';
 import categoriesReducer from '@/features/records/reducers/categories';
 import eventsReducer from '@/features/records/reducers/events';
 import currentDayReducer from '@/features/dayReport/reducers/currentDay';
@@ -8,6 +9,7 @@ import authReducer from '@/features/auth/reducers/auth';
 const store = configureStore({
   reducer: {
     user: userReducer,
+    records: recordsReducer,
     categories: categoriesReducer,
     selectedEventsIds: eventsReducer,
     currentDay: currentDayReducer,
