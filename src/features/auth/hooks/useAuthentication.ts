@@ -8,7 +8,7 @@ interface AuthState {
   user: UserConfig, 
   isLoggedIn: boolean,
   loading: boolean,
-  updateUser: () => void,
+  updateUser: () => Promise<void>,
   removeUser: () => void,
 }
 

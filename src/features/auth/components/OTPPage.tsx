@@ -23,7 +23,7 @@ const OTPPage = () => {
     try {
       const result = await authService.validateOTP({ email, otp });
       if (result && result.data) {
-        updateUser();
+        await updateUser();
         return navigate('/');
       }
     } catch (error) {

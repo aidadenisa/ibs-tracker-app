@@ -1,10 +1,10 @@
 import '@/App.css';
-import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { StrictMode } from 'react';
+import { StrictMode, Suspense } from 'react';
 import router from '@/routes';
 import store from '@/store';
 import AuthProvider from './features/auth/providers/AuthProvider';
+import AppRoutes from '@/routes';
 
 const App = (): JSX.Element => {
   return (
@@ -12,7 +12,7 @@ const App = (): JSX.Element => {
       <AuthProvider>
         <Provider store={store}>
           <div className="App">
-            <RouterProvider router={router} />
+            <AppRoutes />
           </div>
         </Provider>
       </AuthProvider>

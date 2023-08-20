@@ -1,12 +1,32 @@
 
-import { createBrowserRouter } from 'react-router-dom';
+import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import authRoutes from '@/features/auth/routes';
-import dayReportRoutes from '@/features/dayReport/routes';
+import useAuth from '@/features/auth/hooks/useAuth';
 
-const router = createBrowserRouter([
-  ... dayReportRoutes, 
-  ... authRoutes
-]);
+import protectedRoutes from '@/routes/protected';
+import publicRoutes from '@/routes/public';
 
-export default router;
+const AppRoutes = () => {
+
+  const { loading, isLoggedIn, user } = useAuth();
+
+  const commonRoutes = [] as RouteObject[];
+
+  const routes = isLoggedIn && user && Object.keys(user).length
+    ? protectedRoutes
+    : publicRoutes;
+
+  const router = createBrowserRouter([...routes, ...commonRoutes]);
+
+  // TODO: EXTRACT LOADER SOMEWHERE 
+  // TODO: CHECK OUT SUSPENSE + AWAIT FROM REACT ROUTER WEBSITE https://reactrouter.com/en/main/start/overview#skeleton-ui-with-suspense
+  return (
+    <>
+      {loading && <h1>Loading....</h1>}
+      {!loading && <RouterProvider router={router} />}
+    </>
+  )
+
+}
+
+export default AppRoutes;
