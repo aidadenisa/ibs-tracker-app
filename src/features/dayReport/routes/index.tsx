@@ -5,7 +5,7 @@ import { RouteObject } from 'react-router-dom';
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <ProtectedRoute><DayReport /></ProtectedRoute>,
+    element: <DayReport />,
   }, 
 ];
 
