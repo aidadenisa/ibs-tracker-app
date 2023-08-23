@@ -4,7 +4,7 @@ import store from '@/store';
 import { API_URL } from '@/config';
 import { Record, Category } from '@/types';
 import { NewRecord } from '@/features/records/types';
-import { areSameDays } from '@/features/records/utils';
+import { areSameDays } from '@/lib/date';
 import { setSelectedEventsIds } from '@/features/records/reducers/events';
 import { setRecords } from '@/features/records/reducers/records';
 

@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { isSameDay, subDays, addDays } from 'date-fns';
 import { Category } from '@/types';
 import { RootState } from '@/store';
 import { getFormattedDayName } from '@/features/weekCalendar/utils';
@@ -11,6 +10,7 @@ import recordService from '@/features/records/services/records';
 import { useEffect, useMemo, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { getWeekDaysByDate } from '@/features/dayReport/utils';
+import { addDays, areSameDays, substractDays } from '@/lib/date';
 
 const WeekCalendar = () => {
 
@@ -44,7 +44,7 @@ const WeekCalendar = () => {
       addDays(new Date(currentDay), 7).toISOString()
     )),
     onSwipedRight: (eventData) => dispatch(setCurrentDay(
-      subDays(new Date(currentDay), 7).toISOString()
+      substractDays(new Date(currentDay), 7).toISOString()
     )),
   });
 
@@ -53,7 +53,7 @@ const WeekCalendar = () => {
   }
 
   const isCurrentDayClass = (day: string) => {
-    return isSameDay(new Date(day), new Date(currentDay))
+    return areSameDays(new Date(day), new Date(currentDay))
       ? styles.selected
       : '';
   }
