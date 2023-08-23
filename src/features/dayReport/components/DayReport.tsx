@@ -8,7 +8,6 @@ import DailyActionBar from '@/features/records/components/DailyActionBar';
 import AddNewRecordModal from '@/features/records/components/AddNewRecordModal';
 import RecordsList from '@/features/records/components/RecordsList';
 
-import { getWeekDaysByDate } from '@/features/dayReport/utils';
 import categoryService from '@/features/records/services/categories';
 import { setCategories } from '@/features/records/reducers/categories';
 
@@ -21,7 +20,6 @@ const DayReport = () => {
   const categories = useSelector((state: RootState) => state.categories);
   const currentDay = useSelector((state: RootState) => state.currentDay);
   
-  const [days, setDays] = useState<string[]>(getWeekDaysByDate(new Date()));
   const [showAddNewRecordModal, setShowAddNewRecordModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -49,7 +47,7 @@ const DayReport = () => {
         />
       }
       <DateHeader date={currentDay} />
-      <WeekCalendar days={days} />
+      <WeekCalendar />
       <DailyActionBar onAddRecord={handleAddRecordClick} />
       <RecordsList date={currentDay} />
     </div>

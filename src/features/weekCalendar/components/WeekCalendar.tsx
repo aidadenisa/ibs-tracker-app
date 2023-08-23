@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { isSameDay } from 'date-fns';
+import { isSameDay, subDays, addDays } from 'date-fns';
 import { Category } from '@/types';
 import { RootState } from '@/store';
 import { getFormattedDayName } from '@/features/weekCalendar/utils';
@@ -8,24 +8,24 @@ import styles from '@/features/weekCalendar/components/styles/WeekCalendar.modul
 
 // TODO: think better about how to achieve this without coupling this service here
 import recordService from '@/features/records/services/records';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
+import { getWeekDaysByDate } from '@/features/dayReport/utils';
 
-interface WeekCalendarProps {
-  days: string[],
-}
-
-const WeekCalendar = ({ days }: WeekCalendarProps) => {
+const WeekCalendar = () => {
 
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categories);
   const currentDay = useSelector((state: RootState) => state.currentDay);
   const records = useSelector((state: RootState) => state.records);
 
+  const [days, setDays] = useState<string[]>(getWeekDaysByDate(new Date(currentDay)));
+
   // useMemo to perform some expensive computation only when needed
   const categoriesToDisplay = useMemo(
     () => {
       const dayCategories = new Map<string, Category[]>();
-      if(!categories || !categories.length || !records || !records.length) return dayCategories;
+      if (!categories || !categories.length || !records || !records.length) return dayCategories;
 
       for (let i = 0; i < days.length; i++) {
         dayCategories.set(days[i], recordService.populateUserRecords(records, categories, new Date(days[i])))
@@ -34,6 +34,19 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
     },
     [days, categories, records]
   );
+
+  useEffect(() => {
+    setDays(getWeekDaysByDate(new Date(currentDay)));
+  }, [currentDay])
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: (eventData) => dispatch(setCurrentDay(
+      addDays(new Date(currentDay), 7).toISOString()
+    )),
+    onSwipedRight: (eventData) => dispatch(setCurrentDay(
+      subDays(new Date(currentDay), 7).toISOString()
+    )),
+  });
 
   const formattedDate = (day: string): number => {
     return (new Date(day)).getDate();
@@ -58,7 +71,7 @@ const WeekCalendar = ({ days }: WeekCalendarProps) => {
   }
 
   return (
-    <div className={`flexbox week-calendar ${styles.weekCalendar}`}>
+    <div className={`flexbox week-calendar ${styles.weekCalendar}`} {...swipeHandlers}>
       {days && days.length &&
         days.map((day, index) =>
           <div
