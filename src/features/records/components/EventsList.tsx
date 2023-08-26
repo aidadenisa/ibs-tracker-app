@@ -3,14 +3,15 @@ import { Dictionary } from '@reduxjs/toolkit';
 import { Event } from '@/types';
 import styles from '@/features/records/components/styles/EventsList.module.css';
 import EventTag from '@/features/records/components/EventTag';
-import { toggleEventSelectedState } from '@/features/records/reducers/events';
+import { bulkUpdateEvents, toggleEventSelectedState } from '@/features/records/reducers/events';
 
 interface EventsListProps {
   events: Event[],
   canInteract?: boolean,
-  selectedEventsIds?: Dictionary<boolean>
+  selectedEventsIds?: Dictionary<boolean>,
+  isSingleChoice?: boolean
 }
-const EventsList = ({ events, canInteract=false, selectedEventsIds }: EventsListProps) => {
+const EventsList = ({ events, canInteract=false, selectedEventsIds, isSingleChoice = false }: EventsListProps) => {
   const dispatch = useDispatch();
 
   const isSelected = (eventId: string) => {
@@ -19,7 +20,16 @@ const EventsList = ({ events, canInteract=false, selectedEventsIds }: EventsList
 
   const handleClick = (eventId: string) => {
     if(!canInteract) return;
-    dispatch(toggleEventSelectedState(eventId))
+    if(isSingleChoice) {
+      const updatedEvents:Dictionary<boolean> = {};
+      events.forEach(event => {
+        updatedEvents[event.id] = false;
+      })
+      updatedEvents[eventId] = !isSelected(eventId);
+      dispatch(bulkUpdateEvents(updatedEvents))
+    } else {
+      dispatch(toggleEventSelectedState(eventId))
+    }
   }
 
   return (

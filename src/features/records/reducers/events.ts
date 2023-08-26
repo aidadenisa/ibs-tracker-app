@@ -26,6 +26,16 @@ const eventsSlice = createSlice({
       }
       newState[eventId] = !newState[eventId];
       return newState;
+    },
+    bulkUpdateEvents(state, action: PayloadAction<Dictionary<boolean>>) {
+      const newState = JSON.parse(JSON.stringify(state));
+      const eventIds = Object.keys(action.payload);
+
+      for( let i=0; i < eventIds.length; i++ ) {
+        newState[eventIds[i]] = action.payload[eventIds[i]];
+      }
+      
+      return newState;
     }
   }
 
@@ -35,6 +45,7 @@ export const {
   setSelectedEventsIds, 
   selectEvent, 
   unselectEvent,
-  toggleEventSelectedState
+  toggleEventSelectedState,
+  bulkUpdateEvents,
 } = eventsSlice.actions;
 export default eventsSlice.reducer;

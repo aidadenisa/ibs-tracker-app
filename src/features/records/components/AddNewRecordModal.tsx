@@ -5,6 +5,7 @@ import recordService from '@/features/records/services/records'
 import Modal from '@/components/Modal'
 import CategorySection from '@/features/records/components/CategorySection'
 import EventsList from '@/features/records/components/EventsList'
+import { CategoryCode } from '@/features/records/types'
 
 interface AddNewRecordModalProps {
   categories: Category[]
@@ -20,6 +21,11 @@ const AddNewRecordModal = ({ categories, onClose }: AddNewRecordModalProps) => {
       await recordService.refreshRecords();
     }
     onClose();
+  }
+
+  const isSingleChoiceCategory = (categoryCode: string) => {
+    // TODO: MOVE THIS CONCEPT IN THE BACKEND AS PROPERTY OF CATEGORY
+    return categoryCode === CategoryCode.MENSTRUATION || categoryCode === CategoryCode.STOOL
   }
 
   return (
@@ -39,6 +45,7 @@ const AddNewRecordModal = ({ categories, onClose }: AddNewRecordModalProps) => {
                   events={category.events}
                   canInteract={true}
                   selectedEventsIds={selectedEventsIds}
+                  isSingleChoice={isSingleChoiceCategory(category.code)}
                 />
               }
             </CategorySection>
