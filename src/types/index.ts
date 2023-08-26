@@ -19,7 +19,9 @@ interface Record {
   id: string,
   event: string,
   user: string,
-  date: string,
+  day: string,
+  timezone?: string,
+  createdOn?: string,
 }
 
 interface UserConfig {

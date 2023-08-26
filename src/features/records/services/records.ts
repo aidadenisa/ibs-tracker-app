@@ -4,7 +4,7 @@ import store from '@/store';
 import { API_URL } from '@/config';
 import { Record, Category } from '@/types';
 import { NewRecord } from '@/features/records/types';
-import { areSameDays } from '@/lib/date';
+import { areSameDays, formatDate } from '@/lib/date';
 import { setSelectedEventsIds } from '@/features/records/reducers/events';
 import { setRecords } from '@/features/records/reducers/records';
 
@@ -25,9 +25,13 @@ const saveNewRecords = async () => {
   }
   
   const { currentDay } = store.getState();
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const result = await api.post(`${BASE_URL}/multiple`, {
-    dateISO: currentDay,
+    dateInfo: {
+      dayYMD: formatDate(new Date(currentDay), 'yyyy-MM-dd'),
+      timezone: timezone,
+    },
     selectedEventsIds: Object.keys(selectedEventsIds).filter(key => selectedEventsIds[key])
   });
 
@@ -39,7 +43,7 @@ const updateRecordsForCurrentDay = (records: Record[]) => {
 
   const selectedEventsIdsArray = records && !!records.length
     ? records.filter(
-      record => areSameDays(new Date(record.date), new Date(currentDay))
+      record => areSameDays(new Date(record.day), new Date(currentDay))
     ).map(record => record.event)
     : [];
   const selectedEventsIds: Dictionary<boolean> = {};
@@ -55,7 +59,7 @@ const populateUserRecords = (records: Record[], categories: Category[], date: Da
 
   // get event ids of the records saved on this specific date
   const activeRecordsEventsIds = records.filter(record => 
-    areSameDays(new Date(record.date), date)
+    areSameDays(new Date(record.day), date)
   ).map(record => record.event);
 
   // create a new array of categories that only contain event information 
