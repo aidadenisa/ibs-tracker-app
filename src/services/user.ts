@@ -10,6 +10,10 @@ const getCurrentUserInfo = async (): Promise<User> => {
     const result = await api.get(`${BASE_URL}/currentUser?populate=true`)
     return result ? result.data : null;
   } catch (err) {
+    if(localStorage.getItem('token')) {
+      localStorage.removeItem('token');
+      window.location.reload();
+    }
     throw new Error(`There has been a problem retrieving user's data`);
   }
 }

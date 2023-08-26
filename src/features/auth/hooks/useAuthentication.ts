@@ -5,7 +5,7 @@ import tokenService from '@/services/token';
 import { redirect } from 'react-router-dom';
 
 interface AuthState {
-  user: UserConfig, 
+  user: UserConfig,
   isLoggedIn: boolean,
   loading: boolean,
   updateUser: () => Promise<void>,
@@ -37,9 +37,15 @@ const useAuthentication = (): AuthState => {
   }, [user, token]);
 
   const updateUser = async () => {
-    const { records, ...userInfo } = await userService.refreshLoggedInUserData();
-    setUser(userInfo);
-    setLoading(false);
+    try {
+      const { records, ...userInfo } = await userService.refreshLoggedInUserData();
+      setUser(userInfo);
+      setLoading(false);
+    } catch (err) {
+      if(err instanceof Error) {
+        alert(err.message);
+      }
+    }
   };
 
   const removeUser = () => {
