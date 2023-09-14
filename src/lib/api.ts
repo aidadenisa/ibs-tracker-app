@@ -1,22 +1,51 @@
-import axios from 'axios';
-import { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
+import Axios, { AxiosRequestConfig, AxiosRequestHeaders, InternalAxiosRequestConfig } from 'axios';
 import tokenService from '@/services/token';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+import { API_URL } from '@/config';
 
-const getRequestConfig = (): AxiosRequestConfig => {
-  const headers: AxiosRequestHeaders = {} as AxiosRequestHeaders;
-  const token = tokenService.getToken();
+// Interceptor of requests
+// You can use it to set the auth token on requests, log out unauthorized users, send new requests for refreshing tokens.
+const authRequestInterceptor = (config: InternalAxiosRequestConfig) => {
   if (tokenService.hasToken()) {
-    headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${tokenService.getToken()}`;
   }
-  return { headers };
+  config.headers.Accept = 'application/json';
+  return config;
 }
 
+const successResponseInterceptor = (response: any) => {
+  return response;
+}
+
+// Set up an interceptor for handling errors. 
+// You can use it to fire a notification toast to notify users that something went wrong, log out unauthorized users, or send new requests for refreshing tokens.
+const errorResponseInterceptor = (error: any) => {
+  // set a notification with the error
+  // const message = error.response?.data?.message || error.message;
+  // useNotificationStore.getState().addNotification({
+  //   type: 'error',
+  //   title: 'Error',
+  //   message,
+  // });
+
+  if(error.response?.status === 500) {
+    alert('A server error occurred. Please try again later.');
+  }
+
+  return Promise.reject(error);
+}
+
+const axios = Axios.create({
+  baseURL: API_URL,
+});
+
+axios.interceptors.request.use(authRequestInterceptor);
+axios.interceptors.response.use(successResponseInterceptor, errorResponseInterceptor);
+
 const get = (url: string, config?: any): Promise<any> => {
-  const requestConfig = config ? config : getRequestConfig();
   
   return new Promise((resolve, reject) => {
-    axios.get(url, requestConfig)
+    axios.get(url)
       .then((result) => {
         resolve(result);
       })
@@ -27,10 +56,9 @@ const get = (url: string, config?: any): Promise<any> => {
 }
 
 const post = (url: string, payload?: any, config?: any): Promise<any> => {
-  const requestConfig = config ? config : getRequestConfig();
   
   return new Promise((resolve, reject) => {
-    axios.post(url, payload, requestConfig)
+    axios.post(url, payload)
       .then((result) => {
         resolve(result);
       })

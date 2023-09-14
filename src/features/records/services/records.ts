@@ -1,14 +1,13 @@
 import { Dictionary } from '@reduxjs/toolkit';
 import api from '@/lib/api';
 import store from '@/store';
-import { API_URL } from '@/config';
 import { Record, Category } from '@/types';
 import { NewRecord } from '@/features/records/types';
 import { areSameDays, formatDate } from '@/lib/date';
 import { setSelectedEventsIds } from '@/features/records/reducers/events';
 import { setRecords } from '@/features/records/reducers/records';
 
-const BASE_URL = API_URL + '/records';
+const BASE_URL = '/records';
 
 const getRecords = async (id: string): Promise<Record[]> => {
   return (await api.get(`${BASE_URL}/${id}`)).data;
@@ -86,7 +85,7 @@ const updateRecordsState = (records: Record[]) => {
 
 const refreshRecords = async () => {
   try {
-    const result = await api.get(`${API_URL}/users/currentUser?populate=true`)
+    const result = await api.get(`/users/currentUser?populate=true`)
     if(result && result.data && result.data.records) {
       updateRecordsState(result.data.records)
       return result.data.records;

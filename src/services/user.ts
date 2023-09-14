@@ -1,9 +1,8 @@
 import { User } from '@/types';
 import api from '@/lib/api';
 import recordService from '@/features/records/services/records';
-import { API_URL } from '@/config';
 
-const BASE_URL = API_URL + '/users';
+const BASE_URL = '/users';
 
 const getCurrentUserInfo = async (): Promise<User> => {
   try {

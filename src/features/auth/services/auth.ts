@@ -4,7 +4,7 @@ import userService from '@/services/user';
 import { API_URL } from '@/config';
 import tokenService from '@/services/token';
 
-const BASE_URL = API_URL + '/auth';
+const BASE_URL = '/auth';
 
 const login = async (email: string) => { 
   try {
