@@ -1,8 +1,11 @@
 :root {
   --ibs-color-background: #ffffff;
 
-  --ibs-color-primary: #4F66F4;
-  --ibs-color-primary-light: #F1F3FF; 
+  --ibs-color-primary: #444CE7;
+  --ibs-color-primary-light: #EEF4FF;
+  --ibs-color-primary-dark: #3538CD;
+  --ibs-color-primary-contrast: #ffffff;
+
   --ibs-color-gray-light: #F9F9F9;
   --ibs-color-gray: #AEAEAE;
   --ibs-color-black: #1E293B;
@@ -16,7 +19,7 @@
   
   --ibs-margin-unit: 16px;
 
-  --ibs-radius: 16px;
+  --ibs-radius: 8px;
 
   --ibs-font-size-xs: 12px;
   --ibs-font-size-s: 16px;
@@ -24,6 +27,7 @@
   --ibs-font-size-l: 24px;
   --ibs-font-size-xl: 32px;
 
+  --ibs-shadow-size-xs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
 
 }

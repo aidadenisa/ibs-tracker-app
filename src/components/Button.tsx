@@ -3,17 +3,21 @@ interface ButtonProps {
   label: string,
   className?: string,
   disabled?: boolean,
+  size?: 'xs' | 'sm' | 'md' | 'lg',
   onClick?: () => void,
 }
 
-const Button = ({ className, variant, label, disabled, onClick }: ButtonProps) => {
-  const buttonClasses = `ibs-btn ibs-btn-${variant} ${className}`;
+const Button = ({ className, variant, label, disabled, size, onClick }: ButtonProps) => {
+  const buttonClasses = `ibs-btn 
+    ${variant ? `ibs-btn-${variant}` : ''} 
+    ${size ? `ibs-btn__size-${size}` : ''} 
+    ${className ? className : ''}`;
   return (
-    <button 
+    <button
       className={buttonClasses}
       disabled={disabled}
       onClick={onClick}
-    >{ label }</button>
+    >{label}</button>
   )
 }
 

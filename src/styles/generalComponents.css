@@ -55,7 +55,7 @@ p.info-paragraph {
 
 /* PAGES */
 .ibs-header {
-  margin-top: calc( 2 * var(--ibs-margin-unit));
+  margin-top: calc(2 * var(--ibs-margin-unit));
 }
 
 /* INPUT */
@@ -82,16 +82,26 @@ p.info-paragraph {
   margin-top: var(--ibs-margin-unit);
   border-radius: var(--ibs-radius);
   font-weight: 700;
+  box-shadow: var(--ibs-shadow-size-xs);
+}
+
+.ibs-btn.ibs-btn__size-lg {
+  padding: 10px 18px;
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
 }
 
 .ibs-btn-primary {
   color: var(--ibs-color-primary-light);
   background-color: var(--ibs-color-primary);
+  border: 1px solid var(--ibs-color-primary);
 }
 
 .ibs-btn-secondary {
   color: var(--ibs-color-primary);
   background-color: var(--ibs-color-primary-light);
+  border: 1px solid var(--ibs-color-primary-light);
 }
 
 /* MODAL */
@@ -123,7 +133,7 @@ p.info-paragraph {
   font-size: var(--ibs-font-size-l);
 }
 
-.modal__action-bar > * {
+.modal__action-bar>* {
   flex-grow: 1;
 }
 

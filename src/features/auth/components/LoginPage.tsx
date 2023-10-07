@@ -62,11 +62,13 @@ const LoginPage = () => {
             onClick={handleLogin}
             disabled={isDisabled}
             variant="primary"
+            size="lg"
             label="Continue" />
           <Button
-            variant="secondary"
-            label="Create new account"
             disabled={isDisabled}
+            variant="secondary"
+            size="lg"
+            label="Create new account"
           ></Button>
         </>
       }
