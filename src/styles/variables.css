@@ -9,16 +9,17 @@
   --ibs-color-gray-light: #F9F9F9;
   --ibs-color-gray-light2: #D0D5DD;
   --ibs-color-gray: #AEAEAE;
+  --ibs-color-gray-blue: #94A3B8;
   --ibs-color-black: #1E293B;
 
   --ibs-color-input: #101828;
 
-  --ibs-color-symptom: #008DBA;
-  --ibs-color-symptom-light: #dcf7ff;
-  --ibs-color-menstruation: #B00B0B;
-  --ibs-color-menstruation-light: #ffdcdc;
-  --ibs-color-stool: #8D3909;
-  --ibs-color-stool-light: #ffe5d7;
+  --ibs-color-symptom: #175CD3;
+  --ibs-color-symptom-light: #EFF8FF;
+  --ibs-color-menstruation: #C01048;
+  --ibs-color-menstruation-light: #FFF1F3;
+  --ibs-color-stool: #C4320A;
+  --ibs-color-stool-light: #FFF6ED;
   
   --ibs-margin-unit: 16px;
 

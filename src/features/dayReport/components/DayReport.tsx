@@ -48,8 +48,8 @@ const DayReport = () => {
       }
       <DateHeader date={currentDay} />
       <WeekCalendar />
-      <DailyActionBar onAddRecord={handleAddRecordClick} />
       <RecordsList date={currentDay} />
+      <DailyActionBar onAddRecord={handleAddRecordClick} />
     </div>
   )
 }

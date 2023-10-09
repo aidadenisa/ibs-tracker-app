@@ -10,7 +10,7 @@ import recordService from '@/features/records/services/records';
 import { useEffect, useMemo, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { getWeekDaysByDate } from '@/features/dayReport/utils';
-import { addDays, areSameDays, substractDays } from '@/lib/date';
+import { addDays, areSameDays, substractDays, isFuture } from '@/lib/date';
 
 const WeekCalendar = () => {
 
@@ -70,19 +70,25 @@ const WeekCalendar = () => {
     recordService.updateRecordsForCurrentDay(records);
   }
 
+  const isInFuture = (day: string) => {
+    return isFuture(new Date(day)) 
+      ? styles.isFutureDate
+      : ''
+  }
+
   return (
     <div className={`flexbox week-calendar ${styles.weekCalendar}`} {...swipeHandlers}>
       {days && days.length &&
         days.map((day, index) =>
           <div
-            className={`${styles.slot} ${isCurrentDayClass(day)}`}
+            className={`${styles.slot} ${isCurrentDayClass(day)} ${isInFuture(day)}`}
             key={index}
             onClick={() => handleChangeDay(day)}
           >
-            <div className={`week-calendar__day`}>
+            <div className={`week-calendar__day ${styles.weekCalendarDay}`}>
               {formattedDate(day)}
             </div>
-            <div className="week-calendar__day-name">{getFormattedDayName(day)}</div>
+            <div className={`week-calendar__day-name ${styles.weekCalendarDayName}`}>{getFormattedDayName(day)}</div>
             {
               categoriesToDisplay.has(day) && categoriesToDisplay.get(day)?.map(category =>
                 <div

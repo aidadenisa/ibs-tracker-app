@@ -152,11 +152,12 @@ p.info-paragraph {
 
 /* EVENT TAGS */
 .ibs-event-tag {
-  padding: calc(var(--ibs-margin-unit) * 1 / 2) var(--ibs-margin-unit);
+  padding: 8px 12px 8px 12px;
   margin-bottom: var(--ibs-margin-unit);
-  border-radius: var(--ibs-radius);
-  border: 1px solid;
+  border-radius: 16px;
   font-weight: 700;
+  border:0;
+  font-size: var(--ibs-font-size-s);
 }
 
 .ibs-event-tag:not(.selected) {

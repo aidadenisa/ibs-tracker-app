@@ -1,4 +1,4 @@
-import { isSameDay, subDays, addDays as addDaysFns, format } from 'date-fns';
+import { isSameDay, subDays, addDays as addDaysFns, format, isFuture as isFutureFns } from 'date-fns';
 
 const areSameDays = (firstDate: Date | number, secondDate: Date | number) => {
   return isSameDay(firstDate, secondDate);
@@ -16,10 +16,15 @@ const formatDate = (date: Date | number, formatString: string) => {
   return format(date, formatString);
 }
 
+const isFuture = (date: Date | number ) => {
+  return isFutureFns(date);
+}
+
 export {
   areSameDays,
   addDays,
   substractDays,
   formatDate,
+  isFuture
 }
 
