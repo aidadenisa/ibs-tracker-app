@@ -61,17 +61,20 @@ p.info-paragraph {
 /* INPUT */
 .ibs-input {
   font-size: var(--ibs-font-size-s);
-  padding: calc(var(--ibs-margin-unit) * 3 / 4) var(--ibs-margin-unit);
-  border: 1px solid #f0f0f0;
+  line-height: 24px;
+  padding: 10px 14px;
+  border: 1px solid var(--ibs-color-gray-light2);
   border-radius: var(--ibs-radius);
-  background-color: var(--ibs-color-gray-light);
+  background:#FFF;
   width: 100%;
   box-sizing: border-box;
   margin-top: var(--ibs-margin-unit);
+  box-shadow: var(--ibs-shadow-size-xs);
 }
 
 .ibs-input:focus {
   outline-color: var(--ibs-color-primary);
+  color: var(--ibs-color-input);
 }
 
 /* BUTTONS */
