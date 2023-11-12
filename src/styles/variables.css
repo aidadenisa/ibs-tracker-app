@@ -15,10 +15,13 @@
   --ibs-color-input: #101828;
 
   --ibs-color-symptom: #175CD3;
+  --ibs-color-symptom-accent: #2C8AF0;
   --ibs-color-symptom-light: #EFF8FF;
   --ibs-color-menstruation: #C01048;
+  --ibs-color-menstruation-accent: #F63D68;
   --ibs-color-menstruation-light: #FFF1F3;
   --ibs-color-stool: #C4320A;
+  --ibs-color-stool-accent: #F86414;
   --ibs-color-stool-light: #FFF6ED;
   
   --ibs-margin-unit: 16px;

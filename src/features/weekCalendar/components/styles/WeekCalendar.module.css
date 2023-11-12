@@ -1,7 +1,8 @@
 .slot {
+  box-sizing: border-box;
   text-align: center;
   flex: 1 1 0;
-  width: 0;
+  width: 100%;
   padding: var(--ibs-margin-unit) 0;
   color: var(--ibs-color-black);
 }
@@ -13,20 +14,31 @@
   font-size: 14px;
   color: var(--ibs-color-gray-blue);
 }
-.selected {
+.categoryLine {
+  height: 3px;
+  width: 100%; 
+  margin: 3px 0px;
+}
+.isFutureDate:not(.selected) .weekCalendarDay {
+  color: var(--ibs-color-gray-blue);
+}
+
+.isToday {
+  box-sizing: border-box;
   background-color: var(--ibs-color-primary-light);
+}
+.selected {
+  outline: 1px solid var(--ibs-color-primary);
+  z-index: 1;
+}
+.selected, 
+.isToday {
   border-radius: 16px;
   color: var(--ibs-color-primary-dark);
 }
 .selected .weekCalendarDay,
-.selected .weekCalendarDayName {
+.selected .weekCalendarDayName,
+.isToday .weekCalendarDay,
+.isToday .weekCalendarDayName {
   color: var(--ibs-color-primary-dark);
-}
-.categoryLine {
-  height: 3px;
-  width: 100%; 
-  margin: 3px 0;
-}
-.isFutureDate:not(.selected) .weekCalendarDay {
-  color: var(--ibs-color-gray-blue);
 }

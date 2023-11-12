@@ -61,7 +61,7 @@ const WeekCalendar = () => {
   const getCategoryClassname = (category: Category) => {
     return `
       week-calendar__category 
-      ${category.events.length && `ibs-category-${category.code.toLowerCase()}-inverted`}
+      ${category.events.length && `ibs-category-${category.code.toLowerCase()}-accent`}
       ${styles.categoryLine}`
   }
 
@@ -71,9 +71,11 @@ const WeekCalendar = () => {
   }
 
   const isInFuture = (day: string) => {
-    return isFuture(new Date(day)) 
-      ? styles.isFutureDate
-      : ''
+    return isFuture(new Date(day)) ? styles.isFutureDate : ''
+  }
+
+  const isToday = (day: string) => {
+    return areSameDays(new Date(day), new Date()) ? styles.isToday : ''
   }
 
   return (
@@ -81,7 +83,7 @@ const WeekCalendar = () => {
       {days && days.length &&
         days.map((day, index) =>
           <div
-            className={`${styles.slot} ${isCurrentDayClass(day)} ${isInFuture(day)}`}
+            className={`${styles.slot} ${isCurrentDayClass(day)} ${isInFuture(day)} ${isToday(day)}`}
             key={index}
             onClick={() => handleChangeDay(day)}
           >

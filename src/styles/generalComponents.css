@@ -29,6 +29,20 @@
   background-color: var(--ibs-color-stool);
 }
 
+.ibs-category-symptom-accent {
+  color: var(--ibs-color-symptom-light);
+  background-color: var(--ibs-color-symptom-accent);
+}
+
+.ibs-category-menstruation-accent {
+  color: var(--ibs-color-menstruation-light);
+  background-color: var(--ibs-color-menstruation-accent);
+}
+
+.ibs-category-stool-accent {
+  color: var(--ibs-color-stool-light);
+  background-color: var(--ibs-color-stool-accent);
+}
 /* HEADINGS */
 h1 {
   font-size: var(--ibs-font-size-xl);
