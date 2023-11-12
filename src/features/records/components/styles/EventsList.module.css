@@ -2,3 +2,6 @@
   display: inline-block;
   margin-right: var(--ibs-margin-unit);
 }
+.eventList {
+  padding: 1px;
+}

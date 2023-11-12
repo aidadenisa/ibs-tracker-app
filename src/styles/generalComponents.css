@@ -122,7 +122,8 @@ p.info-paragraph {
 
 /* MODAL */
 .modal {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -138,6 +139,9 @@ p.info-paragraph {
 .modal__action-bar {
   padding: 0 var(--ibs-margin-unit);
   margin: var(--ibs-margin-unit) 0;
+}
+.modal__body {
+  overflow: scroll;
 }
 
 .modal__header {
@@ -157,13 +161,11 @@ p.info-paragraph {
 .modal__action-bar {
   display: flex;
   justify-content: flex-end;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background-color: var(--ibs-color-background);
 }
-
+.modal__action-bar button:first-child {
+  margin-top: initial;
+}
 /* EVENT TAGS */
 .ibs-event-tag {
   padding: 8px 12px 8px 12px;
