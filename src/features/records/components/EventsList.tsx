@@ -15,7 +15,7 @@ const EventsList = ({ events, canInteract=false, selectedEventsIds, isSingleChoi
   const dispatch = useDispatch();
 
   const isSelected = (eventId: string) => {
-    return (canInteract && selectedEventsIds && selectedEventsIds[eventId]) || !canInteract;
+    return (canInteract && selectedEventsIds && selectedEventsIds[eventId]);
   }
 
   const handleClick = (eventId: string) => {
