@@ -38,6 +38,7 @@ const saveNewRecords = async () => {
   return result;
 }
 
+// TODO: consider refactoring this to accept already filtered records (eg. coming from Day Report)
 const updateRecordsForCurrentDay = (records: Record[]) => {
   const currentDay = store.getState().currentDay;
 

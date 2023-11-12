@@ -40,19 +40,23 @@ const DayReport = () => {
     fetchCategories();
   }, []);
 
-  useEffect(() => {
-    recordService.updateRecordsForCurrentDay(getRecordsByDay(currentDay));
-  }, [currentDay])
-
   // useMemo to perform some expensive computation only when needed
   const daysRecordsMap = useMemo(
     () => recordService.matchRecordsToDays(records),
     [ records ]
   );
 
-  const currentDayRecords = getRecordsByDay(currentDay)
+  const currentDayRecords = useMemo(
+    () => getRecordsByDay(currentDay),
+    [ currentDay, daysRecordsMap ]
+  )
+
+  useEffect(() => {
+    recordService.updateRecordsForCurrentDay(currentDayRecords);
+  }, [currentDay])
 
   const handleAddRecordClick = () => {
+    recordService.updateRecordsForCurrentDay(currentDayRecords)
     setShowAddNewRecordModal(true);
   }
   const handleCloseModalClick = () => {

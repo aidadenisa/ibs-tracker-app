@@ -32,7 +32,7 @@ const AddNewRecordModal = ({ categories, onClose }: AddNewRecordModalProps) => {
     <Modal
       title="What happened today?"
       primaryBtnLabel="All done"
-      onClose={handleSaveRecords}
+      onClose={onClose}
       onPrimary={handleSaveRecords}
     >
       <div className="new-record__categories">
