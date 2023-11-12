@@ -36,6 +36,10 @@ interface User extends UserConfig{
   records: Record[],
 }
 
+interface DetailedRecord extends Record {
+  eventDetails: Event
+}
+
 
 export type {
   Category,
@@ -43,4 +47,5 @@ export type {
   User,
   UserConfig,
   Record,
+  DetailedRecord,
 }

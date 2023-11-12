@@ -1,7 +1,3 @@
 .categorySection {
   width: 100%;
 }
-
-.categorySection button {
-  margin-right: var(--ibs-margin-unit);
-}

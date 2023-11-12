@@ -19,7 +19,7 @@ const getCurrentUserInfo = async (): Promise<User> => {
 
 const refreshLoggedInUserData = async (): Promise<User> => {
   const user = await getCurrentUserInfo();
-  recordService.updateRecordsState(user.records);
+  recordService.populateUserData(user);
   return user;
 }
 

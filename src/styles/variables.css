@@ -1,6 +1,8 @@
 :root {
   --ibs-color-background: #ffffff;
 
+  --ibs-color-text: #0B0B0B;
+
   --ibs-color-primary: #444CE7;
   --ibs-color-primary-light: #EEF4FF;
   --ibs-color-primary-dark: #3538CD;

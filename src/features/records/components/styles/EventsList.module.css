@@ -1,0 +1,4 @@
+.eventTag {
+  display: inline-block;
+  margin-right: var(--ibs-margin-unit);
+}

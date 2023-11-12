@@ -1,38 +1,57 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Category } from '@/types';
+import { DetailedRecord } from '@/types';
 import { RootState } from '@/store';
 import { getFormattedDayName } from '@/features/weekCalendar/utils';
 import { setCurrentDay } from '@/features/dayReport/reducers/currentDay';
 import styles from '@/features/weekCalendar/components/styles/WeekCalendar.module.css';
 
-// TODO: think better about how to achieve this without coupling this service here
-import recordService from '@/features/records/services/records';
 import { useEffect, useMemo, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { getWeekDaysByDate } from '@/features/dayReport/utils';
 import { addDays, areSameDays, substractDays, isFuture } from '@/lib/date';
+import { format } from 'date-fns';
 
-const WeekCalendar = () => {
+interface WeekCalendarProps {
+  daysRecordsMap: Map<string, DetailedRecord[]>
+}
+type CategoryLine = {
+  categoryCode: string
+  isVisible: boolean
+}
+const WeekCalendar = ({ daysRecordsMap }: WeekCalendarProps) => {
 
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categories);
   const currentDay = useSelector((state: RootState) => state.currentDay);
-  const records = useSelector((state: RootState) => state.records);
 
   const [days, setDays] = useState<string[]>(getWeekDaysByDate(new Date(currentDay)));
 
   // useMemo to perform some expensive computation only when needed
   const categoriesToDisplay = useMemo(
     () => {
-      const dayCategories = new Map<string, Category[]>();
-      if (!categories || !categories.length || !records || !records.length) return dayCategories;
-
+      const dayCategories = new Map<string, CategoryLine[]>();
+      if (!daysRecordsMap || !daysRecordsMap.size) return dayCategories;
+      const getRecordsByDay = (day: string): DetailedRecord[] => {
+        return daysRecordsMap.get(format(new Date(day), 'yyyy-MM-dd')) || [] as DetailedRecord[]
+      }
       for (let i = 0; i < days.length; i++) {
-        dayCategories.set(days[i], recordService.populateUserRecords(records, categories, new Date(days[i])))
+        const categoryCodes = getRecordsByDay(days[i])
+          .map(record => record.eventDetails)
+          .map(event => event.category_code)
+        const codesSet = new Set(categoryCodes)
+        dayCategories.set(
+          days[i], 
+          categories.map(
+            category => ({ 
+              categoryCode: category.code, 
+              isVisible: codesSet.has(category.code) 
+            })
+          )
+        )
       }
       return dayCategories;
     },
-    [days, categories, records]
+    [days, daysRecordsMap]
   );
 
   useEffect(() => {
@@ -58,16 +77,15 @@ const WeekCalendar = () => {
       : '';
   }
 
-  const getCategoryClassname = (category: Category) => {
+  const getCategoryStyles = (category: CategoryLine) => {
     return `
       week-calendar__category 
-      ${category.events.length && `ibs-category-${category.code.toLowerCase()}-accent`}
+      ${category.isVisible && `ibs-category-${category.categoryCode.toLowerCase()}-accent`}
       ${styles.categoryLine}`
   }
 
   const handleChangeDay = (day: string) => {
     dispatch(setCurrentDay(day));
-    recordService.updateRecordsForCurrentDay(records);
   }
 
   const isInFuture = (day: string) => {
@@ -94,8 +112,8 @@ const WeekCalendar = () => {
             {
               categoriesToDisplay.has(day) && categoriesToDisplay.get(day)?.map(category =>
                 <div
-                  className={getCategoryClassname(category)}
-                  key={category.id}
+                  className={getCategoryStyles(category)}
+                  key={`${category.categoryCode}-${day}`}
                 ></div>
               )
             }

@@ -36,12 +36,13 @@ const EventsList = ({ events, canInteract=false, selectedEventsIds, isSingleChoi
     <div className={styles.eventsList}>
       {events && events.length &&
         events.map(event =>
-          <EventTag
-            event={event}
-            key={event.id}
-            isSelected={isSelected(event.id)}
-            onClick={() => handleClick(event.id)}
-          />
+          <div className={styles.eventTag} key={event.id}>
+            <EventTag
+              event={event}
+              isSelected={isSelected(event.id)}
+              onClick={() => handleClick(event.id)}
+            />
+          </div>
         )}
     </div>
   )

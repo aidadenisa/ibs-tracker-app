@@ -1,6 +1,7 @@
 .App {
   padding: 0 20px;
   font-size: var(--ibs-font-size-s);
+  color: var(--ibs-color-text);
 }
 
 .flexbox {
