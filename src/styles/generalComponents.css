@@ -2,16 +2,25 @@
 .ibs-category-symptom {
   color: var(--ibs-color-symptom);
   background-color: var(--ibs-color-symptom-light);
+  outline-color: var(--ibs-color-symptom -accent);
 }
 
 .ibs-category-menstruation {
   color: var(--ibs-color-menstruation);
   background-color: var(--ibs-color-menstruation-light);
+  outline-color: var(--ibs-color-menstruation-accent);
 }
 
 .ibs-category-stool {
   color: var(--ibs-color-stool);
   background-color: var(--ibs-color-stool-light);
+  outline-color: var(--ibs-color-stool-accent);
+}
+
+.ibs-category-food {
+  color: var(--ibs-color-food);
+  background-color: var(--ibs-color-food-light);
+  outline-color: var(--ibs-color-food-accent);
 }
 
 .ibs-category-symptom-inverted {
@@ -29,6 +38,11 @@
   background-color: var(--ibs-color-stool);
 }
 
+.ibs-category-food-inverted {
+  color: var(--ibs-color-food-light);
+  background-color: var(--ibs-color-food);
+}
+
 .ibs-category-symptom-accent {
   color: var(--ibs-color-symptom-light);
   background-color: var(--ibs-color-symptom-accent);
@@ -43,6 +57,12 @@
   color: var(--ibs-color-stool-light);
   background-color: var(--ibs-color-stool-accent);
 }
+
+.ibs-category-food-accent {
+  color: var(--ibs-color-food-light);
+  background-color: var(--ibs-color-food-accent);
+}
+
 /* HEADINGS */
 h1 {
   font-size: var(--ibs-font-size-xl);
@@ -78,7 +98,7 @@ p.info-paragraph {
   padding: 10px 14px;
   border: 1px solid var(--ibs-color-gray-light2);
   border-radius: var(--ibs-radius);
-  background:#FFF;
+  background: #FFF;
   width: 100%;
   box-sizing: border-box;
   margin-top: var(--ibs-margin-unit);
@@ -140,6 +160,7 @@ p.info-paragraph {
   padding: 0 var(--ibs-margin-unit);
   margin: var(--ibs-margin-unit) 0;
 }
+
 .modal__body {
   overflow: scroll;
 }
@@ -163,19 +184,22 @@ p.info-paragraph {
   justify-content: flex-end;
   background-color: var(--ibs-color-background);
 }
+
 .modal__action-bar button:first-child {
   margin-top: initial;
 }
+
 /* EVENT TAGS */
 .ibs-event-tag {
   padding: 8px 12px 8px 12px;
   margin-bottom: var(--ibs-margin-unit);
   border-radius: 16px;
   font-weight: 700;
-  border:0;
+  border: 0;
   font-size: var(--ibs-font-size-s);
 }
 
 .ibs-event-tag.selected {
-  outline: 1px solid;
+  outline-width: 1px;
+  outline-style: solid;
 }

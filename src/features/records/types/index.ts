@@ -2,10 +2,11 @@ interface NewRecord {
   eventId: string,
 }
 
-const CategoryCode = { 
+const CategoryCode = {
   MENSTRUATION: 'MENSTRUATION',
   STOOL: 'STOOL',
   SYMPTOM: 'SYMPTOM',
+  FOOD: 'FOOD',
 }
 
 export type {

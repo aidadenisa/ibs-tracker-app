@@ -3,22 +3,26 @@
   text-align: center;
   flex: 1 1 0;
   width: 100%;
-  padding: var(--ibs-margin-unit) 0;
+  padding: 10px 0;
   color: var(--ibs-color-black);
 }
+
 .weekCalendarDay {
   font-size: 20px;
   font-weight: 700;
 }
+
 .weekCalendarDayName {
   font-size: 14px;
   color: var(--ibs-color-gray-blue);
 }
+
 .categoryLine {
   height: 3px;
-  width: 100%; 
+  width: 100%;
   margin: 3px 0px;
 }
+
 .isFutureDate:not(.selected) .weekCalendarDay {
   color: var(--ibs-color-gray-blue);
 }
@@ -27,15 +31,18 @@
   box-sizing: border-box;
   background-color: var(--ibs-color-primary-light);
 }
+
 .selected {
   outline: 1px solid var(--ibs-color-primary);
   z-index: 1;
 }
-.selected, 
+
+.selected,
 .isToday {
   border-radius: 16px;
   color: var(--ibs-color-primary-dark);
 }
+
 .selected .weekCalendarDay,
 .selected .weekCalendarDayName,
 .isToday .weekCalendarDay,
