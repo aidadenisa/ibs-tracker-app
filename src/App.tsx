@@ -1,8 +1,8 @@
-import '@/App.css';
+import './App.css';
 import { Provider } from 'react-redux';
 import { StrictMode } from 'react';
 import store from '@/store';
-import AuthProvider from './features/auth/providers/AuthProvider';
+import AuthProvider from '@/features/auth/providers/AuthProvider';
 import AppRoutes from '@/routes';
 import { ErrorBoundary } from 'react-error-boundary';
 import RouteErrorFallback from '@/components/RouteErrorFallback';
