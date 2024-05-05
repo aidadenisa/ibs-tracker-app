@@ -25,6 +25,7 @@ const DayReport = () => {
   const records = useSelector((state: RootState) => state.records);
 
   const [showAddNewRecordModal, setShowAddNewRecordModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true)
 
   const getRecordsByDay = (day: string) => {
     return daysRecordsMap.get(format(new Date(day), 'yyyy-MM-dd')) || []
@@ -32,9 +33,11 @@ const DayReport = () => {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      if(!categories || (categories && !categories.length)) {
+      if (!categories || (categories && !categories.length)) {
+        setLoading(true)
         const categories = await categoryService.getCategoriesWithEvents();
         dispatch(setCategories(categories));
+        setLoading(false)
       }
     }
     fetchCategories();
@@ -43,12 +46,12 @@ const DayReport = () => {
   // useMemo to perform some expensive computation only when needed
   const daysRecordsMap = useMemo(
     () => recordService.matchRecordsToDays(records),
-    [ records ]
+    [records]
   );
 
   const currentDayRecords = useMemo(
     () => getRecordsByDay(currentDay),
-    [ currentDay, daysRecordsMap ]
+    [currentDay, daysRecordsMap]
   )
 
   useEffect(() => {
@@ -63,21 +66,27 @@ const DayReport = () => {
     setShowAddNewRecordModal(false);
   }
   return (
-    <div className={`day-report ${styles.dayReport}`}>
-      {showAddNewRecordModal &&
-        <AddNewRecordModal
-          categories={categories}
-          onClose={handleCloseModalClick}
-        />
+    <>
+      {!loading &&
+        <div className={`day-report ${styles.dayReport}`}>
+          {showAddNewRecordModal &&
+            <AddNewRecordModal
+              categories={categories}
+              onClose={handleCloseModalClick}
+            />
+          }
+          <DateHeader date={currentDay} />
+          {/* <WeekCalendar onChangeCurrentDate={handleChangeCurrentDate}/> */}
+          <WeekCalendar daysRecordsMap={daysRecordsMap} />
+          <Section title="Today's records">
+            {currentDayRecords && <CompressedRecordsList records={currentDayRecords} />}
+          </Section>
+          <DailyActionBar onAddRecord={handleAddRecordClick} />
+        </div>
       }
-      <DateHeader date={currentDay} />
-      {/* <WeekCalendar onChangeCurrentDate={handleChangeCurrentDate}/> */}
-      <WeekCalendar daysRecordsMap={daysRecordsMap}/>
-      <Section title="Today's records">
-        { currentDayRecords && <CompressedRecordsList records={currentDayRecords} /> }
-      </Section>
-      <DailyActionBar onAddRecord={handleAddRecordClick} />
-    </div>
+      {loading && <h2>Loading...</h2>}
+    </>
+
   )
 }
 
