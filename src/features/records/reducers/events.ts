@@ -4,7 +4,7 @@ const eventsSlice = createSlice({
   name: 'selectedEventsIds',
   initialState: {} as Dictionary<boolean>,
   reducers: {
-    setSelectedEventsIds(state, action: PayloadAction<Dictionary<boolean>>) {
+    setSelectedEventsIds(_, action: PayloadAction<Dictionary<boolean>>) {
       return action.payload;
     },
     selectEvent(state, action: PayloadAction<string>) {

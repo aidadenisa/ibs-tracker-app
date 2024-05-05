@@ -4,10 +4,9 @@ import styles from '@/features/records/components/styles/CategorySection.module.
 
 interface CategorySectionProps {
   category: Category, 
-  canInteract?: boolean,
   children?: ReactNode,
 }
-const CategorySection = ({ category, canInteract=false, children }: CategorySectionProps) => {
+const CategorySection = ({ category, children }: CategorySectionProps) => {
   return (
     <div className={styles.categorySection}>
       <div className="category__name">

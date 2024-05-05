@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { DetailedRecord, Record } from '@/types';
+import { DetailedRecord } from '@/types';
 
 const recordSlice = createSlice({
   name: 'records',
   initialState: [] as DetailedRecord[],
   reducers: {
-    setRecords(state, action: PayloadAction<DetailedRecord[]>) {
+    setRecords(_, action: PayloadAction<DetailedRecord[]>) {
       return action.payload;
     }
   }

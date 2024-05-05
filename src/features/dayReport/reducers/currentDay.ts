@@ -4,7 +4,7 @@ const currentDaySlice = createSlice({
   name: 'currentDay',
   initialState: (new Date()).toISOString(),
   reducers: {
-    setCurrentDay(state, action: PayloadAction<string>) {
+    setCurrentDay(_, action: PayloadAction<string>) {
       return action.payload;
     }
   }

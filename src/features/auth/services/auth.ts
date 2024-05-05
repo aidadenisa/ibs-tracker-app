@@ -1,7 +1,5 @@
 import api from '@/lib/api';
 import { AuthInput } from '@/features/auth/types';
-import userService from '@/services/user';
-import { API_URL } from '@/config';
 import tokenService from '@/services/token';
 
 const BASE_URL = '/auth';

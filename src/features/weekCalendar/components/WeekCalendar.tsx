@@ -59,10 +59,10 @@ const WeekCalendar = ({ daysRecordsMap }: WeekCalendarProps) => {
   }, [currentDay])
 
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: (eventData) => dispatch(setCurrentDay(
+    onSwipedLeft: (_) => dispatch(setCurrentDay(
       addDays(new Date(currentDay), 7).toISOString()
     )),
-    onSwipedRight: (eventData) => dispatch(setCurrentDay(
+    onSwipedRight: (_) => dispatch(setCurrentDay(
       substractDays(new Date(currentDay), 7).toISOString()
     )),
   });

@@ -10,7 +10,6 @@ import { setEmail } from '@/features/auth/reducers/auth';
 const LoginPage = () => {
 
   const [email, setEmailInput] = useState('');
-  const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState<null | string>(null);
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import Axios, { AxiosRequestConfig, AxiosRequestHeaders, InternalAxiosRequestConfig } from 'axios';
+import Axios, { InternalAxiosRequestConfig } from 'axios';
 import tokenService from '@/services/token';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { API_URL } from '@/config';
@@ -42,7 +42,7 @@ const axios = Axios.create({
 axios.interceptors.request.use(authRequestInterceptor);
 axios.interceptors.response.use(successResponseInterceptor, errorResponseInterceptor);
 
-const get = (url: string, config?: any): Promise<any> => {
+const get = (url: string): Promise<any> => {
   
   return new Promise((resolve, reject) => {
     axios.get(url)
@@ -55,7 +55,7 @@ const get = (url: string, config?: any): Promise<any> => {
   });
 }
 
-const post = (url: string, payload?: any, config?: any): Promise<any> => {
+const post = (url: string, payload?: any): Promise<any> => {
   
   return new Promise((resolve, reject) => {
     axios.post(url, payload)
