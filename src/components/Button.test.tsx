@@ -1,8 +1,8 @@
-import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Button from '@/components/Button';
+import Button from './Button.tsx';
+import { describe, test, expect, vi } from 'vitest';
 
 describe('<Button/>', () => {
 
@@ -27,7 +27,7 @@ describe('<Button/>', () => {
   });
 
   test('clicking the button calls the event handler once', async () => {
-    const mockHandler = jest.fn();
+    const mockHandler = vi.fn();
     render(<Button
       variant="primary"
       label="Test Button"
@@ -38,6 +38,6 @@ describe('<Button/>', () => {
     const button = screen.getByText('Test Button');
     await user.click(button)
 
-    expect(mockHandler.mock.calls).toHaveLength(1);
+    expect(mockHandler).toHaveBeenCalledOnce()
   });
 })
