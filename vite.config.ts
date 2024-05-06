@@ -14,9 +14,4 @@ export default defineConfig({
       // this sets a default port to 3000  
       port: 3000, 
   },
-  resolve: {
-    alias: {
-      '@/': `${path.resolve(__dirname, 'src')}/`
-    }
-  },
 })
