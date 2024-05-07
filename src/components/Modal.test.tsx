@@ -1,9 +1,7 @@
-import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import Modal from '@/components/general/Modal';
+import Modal from './Modal.tsx';
+import { describe, test, expect, vi } from 'vitest';
 
 describe('<Modal/>', () => {
   test('renders', async () => {
@@ -33,12 +31,12 @@ describe('<Modal/>', () => {
     expect(secondaryButton).toBeInstanceOf(HTMLButtonElement);
     expect(container.querySelectorAll('.modal__action-bar button')).toHaveLength(2);
 
-    expect(container.querySelector('.modal__header .modal__title').innerHTML).toBe('Test Title');
-    expect(container.querySelector('.modal__body')).toContainHTML('<div>Test child Component</div>');
+    expect(container.querySelector('.modal__header .modal__title')?.innerHTML).toBe('Test Title');
+    expect(container.querySelector('.modal__body')?.innerHTML).toContain('<div>Test child Component</div>');
   })
 
   test('on close click handler works', async () => {
-    const mockHandler = jest.fn();
+    const mockHandler = vi.fn();
 
     const { container } = render(
       <Modal
@@ -51,31 +49,32 @@ describe('<Modal/>', () => {
 
     const user = userEvent.setup();
     const closeButton = container.querySelector('.modal__close-btn');
-    await user.click(closeButton);
+    expect(closeButton).toBeDefined()
+    closeButton &&  await user.click(closeButton);
 
-    expect(mockHandler.mock.calls).toHaveLength(1);
+    expect(mockHandler).toHaveBeenCalledOnce();
   })
 
   test('primary button click handler works', async () => {
-    const mockHandler = jest.fn();
+    const mockHandler = vi.fn();
 
     render(
       <Modal
         title="Test Modal"
         primaryBtnLabel="Test Button"
         onPrimary={mockHandler}>
-          <div>Test Child Component</div>
-        </Modal>
+        <div>Test Child Component</div>
+      </Modal>
     );
 
     const user = userEvent.setup();
     await user.click(screen.getByText('Test Button'));
 
-    expect(mockHandler.mock.calls).toHaveLength(1);
+    expect(mockHandler).toHaveBeenCalledOnce();
   })
 
   test('secondary button click handler works', async () => {
-    const mockHandler = jest.fn();
+    const mockHandler = vi.fn();
 
     render(
       <Modal
@@ -83,13 +82,13 @@ describe('<Modal/>', () => {
         primaryBtnLabel="Test Primary"
         secondaryBtnLabel="Test Secondary"
         onSecondary={mockHandler}>
-          <div>Test Child Component</div>
-        </Modal>
+        <div>Test Child Component</div>
+      </Modal>
     );
 
     const user = userEvent.setup();
     await user.click(screen.getByText('Test Secondary'));
-    expect(mockHandler.mock.calls).toHaveLength(1);
+    expect(mockHandler).toHaveBeenCalledOnce();
   })
 
 })

@@ -1,7 +1,7 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios';
 import tokenService from '@/services/token';
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { API_URL } from '@/config';
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 
 // Interceptor of requests
 // You can use it to set the auth token on requests, log out unauthorized users, send new requests for refreshing tokens.

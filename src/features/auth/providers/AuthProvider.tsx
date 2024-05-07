@@ -1,9 +1,9 @@
-import { createContext } from 'react';
+import { ReactNode, createContext } from 'react';
 import { useAuthentication, AuthState } from '@/features/auth/hooks/useAuthentication';
 
 const AuthContext = createContext<AuthState>({} as AuthState);
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const authCapabilities = useAuthentication();
 
