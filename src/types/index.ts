@@ -1,5 +1,3 @@
-import { User } from "phosphor-react"
-
 // NOTE: THE PROPS WITH __ IN FRONT ARE ONLY USED IN THE FRONTEND (NOT FROM THE DB)
 interface Category {
   id: string, 

@@ -1,11 +1,11 @@
-import { HTMLInputTypeAttribute, ReactNode } from 'react';
+import { ChangeEvent, HTMLInputTypeAttribute, ReactNode } from 'react';
 
 interface InputProps {
   id?: string,
   type?: HTMLInputTypeAttribute,
   placeholder?: string, 
   value: string,
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
   children?: ReactNode,
 }
 const Input = ({ id, type, placeholder, value, onChange, children }: InputProps) => {

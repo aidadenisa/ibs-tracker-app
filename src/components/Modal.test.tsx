@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/vitest';
 import userEvent from '@testing-library/user-event';
 import Modal from './Modal.tsx';
 import { describe, test, expect, vi } from 'vitest';
@@ -33,7 +32,7 @@ describe('<Modal/>', () => {
     expect(container.querySelectorAll('.modal__action-bar button')).toHaveLength(2);
 
     expect(container.querySelector('.modal__header .modal__title')?.innerHTML).toBe('Test Title');
-    expect(container.querySelector('.modal__body')).toContainHTML('<div>Test child Component</div>');
+    expect(container.querySelector('.modal__body')?.innerHTML).toContain('<div>Test child Component</div>');
   })
 
   test('on close click handler works', async () => {
@@ -64,8 +63,8 @@ describe('<Modal/>', () => {
         title="Test Modal"
         primaryBtnLabel="Test Button"
         onPrimary={mockHandler}>
-          <div>Test Child Component</div>
-        </Modal>
+        <div>Test Child Component</div>
+      </Modal>
     );
 
     const user = userEvent.setup();
@@ -75,7 +74,7 @@ describe('<Modal/>', () => {
   })
 
   test('secondary button click handler works', async () => {
-    const mockHandler = jest.fn();
+    const mockHandler = vi.fn();
 
     render(
       <Modal
@@ -83,8 +82,8 @@ describe('<Modal/>', () => {
         primaryBtnLabel="Test Primary"
         secondaryBtnLabel="Test Secondary"
         onSecondary={mockHandler}>
-          <div>Test Child Component</div>
-        </Modal>
+        <div>Test Child Component</div>
+      </Modal>
     );
 
     const user = userEvent.setup();
